@@ -10,4 +10,7 @@ target 'VolunteerMe' do
   pod 'BDBOAuth1Manager'
   pod 'Parse'
   pod 'ParseLiveQuery'
+  pod 'DateToolsSwift'
+  pod 'FLEX'
+  pod 'UIColor_Hex_Swift'
 end
