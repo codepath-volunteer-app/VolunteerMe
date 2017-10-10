@@ -18,6 +18,8 @@ PODS:
     - AFNetworking/NSURLSession (~> 3.0.0)
   - Bolts-Swift (1.3.0)
   - Bolts/Tasks (1.8.4)
+  - DateToolsSwift (2.0.3)
+  - FLEX (2.4.0)
   - Parse (1.15.1):
     - Bolts/Tasks (~> 1.8)
   - ParseLiveQuery (2.2.0):
@@ -25,22 +27,29 @@ PODS:
     - Parse (~> 1.15.0)
     - Starscream (= 2.1.0)
   - Starscream (2.1.0)
+  - UIColor_Hex_Swift (3.0.2)
 
 DEPENDENCIES:
   - AFNetworking
   - BDBOAuth1Manager
+  - DateToolsSwift
+  - FLEX
   - Parse
   - ParseLiveQuery
+  - UIColor_Hex_Swift
 
 SPEC CHECKSUMS:
   AFNetworking: a0075feb321559dc78d9d85b55d11caa19eabb93
   BDBOAuth1Manager: 92d17d06f8a648602962304cd2f35ae7394fa001
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Bolts-Swift: fa98d1b59fc1acea9b21a21306dcdca1c85e3737
+  DateToolsSwift: bf69bf9056d9e53c5c03f06e51f219b9b8b02f9e
+  FLEX: bd1a39e55b56bb413b6f1b34b3c10a0dc44ef079
   Parse: b7a77b20b8a6dede8058da1e2b339593578ce158
   ParseLiveQuery: 6adb2dee9406b7fd1ea69f2a36ab172973b0f3da
   Starscream: 168fd64c345fb2dea71b0a869c482aeffcf866e4
+  UIColor_Hex_Swift: 95f718452092a3efc8a827dffd2c04d3237be02d
 
-PODFILE CHECKSUM: 5dd1d5ab1d76750101f555fc5cdf1bc9ce56c217
+PODFILE CHECKSUM: 484b04be4e0a6baba15aeee2d59994dc3b6e7c25
 
-COCOAPODS: 1.2.1
+COCOAPODS: 1.3.1
