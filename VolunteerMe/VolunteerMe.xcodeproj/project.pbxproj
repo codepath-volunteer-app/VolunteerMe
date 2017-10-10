@@ -40,6 +40,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		98328CC81F8C785C004A0BEC /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		98328CC91F8C7871004A0BEC /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
 		9CD7EFCBFDA55C573EC4B01E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -69,6 +83,8 @@
 		DD8D57B31F87F33700497D5A /* VolunteerMe */ = {
 			isa = PBXGroup;
 			children = (
+				98328CC91F8C7871004A0BEC /* ViewControllers */,
+				98328CC81F8C785C004A0BEC /* Views */,
 				DD8D57B41F87F33700497D5A /* AppDelegate.swift */,
 				DD8D57B61F87F33700497D5A /* ViewController.swift */,
 				DD8D57B81F87F33700497D5A /* Main.storyboard */,
@@ -400,6 +416,7 @@
 				DD8D57C51F87F33700497D5A /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
