@@ -7,9 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		984234191F8ECA6600FF05BB /* VolunteerFeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 984234181F8ECA6600FF05BB /* VolunteerFeedViewController.swift */; };
+		9842341B1F8ECAEC00FF05BB /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9842341A1F8ECAEC00FF05BB /* FeedCell.swift */; };
 		BA84084439190B92F2866B4E /* Pods_VolunteerMe.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C16B82B4024A6E4EA422ED68 /* Pods_VolunteerMe.framework */; };
 		DD8D57B51F87F33700497D5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D57B41F87F33700497D5A /* AppDelegate.swift */; };
-		DD8D57B71F87F33700497D5A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD8D57B61F87F33700497D5A /* ViewController.swift */; };
 		DD8D57BA1F87F33700497D5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD8D57B81F87F33700497D5A /* Main.storyboard */; };
 		DD8D57BC1F87F33700497D5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD8D57BB1F87F33700497D5A /* Assets.xcassets */; };
 		DD8D57BF1F87F33700497D5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD8D57BD1F87F33700497D5A /* LaunchScreen.storyboard */; };
@@ -18,10 +19,11 @@
 /* Begin PBXFileReference section */
 		2A45DFAE001ECB1D1A662734 /* Pods-VolunteerMe.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VolunteerMe.release.xcconfig"; path = "Pods/Target Support Files/Pods-VolunteerMe/Pods-VolunteerMe.release.xcconfig"; sourceTree = "<group>"; };
 		7AE2E20A6EA74598B004DB2D /* Pods-VolunteerMe.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-VolunteerMe.debug.xcconfig"; path = "Pods/Target Support Files/Pods-VolunteerMe/Pods-VolunteerMe.debug.xcconfig"; sourceTree = "<group>"; };
+		984234181F8ECA6600FF05BB /* VolunteerFeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VolunteerFeedViewController.swift; sourceTree = "<group>"; };
+		9842341A1F8ECAEC00FF05BB /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		C16B82B4024A6E4EA422ED68 /* Pods_VolunteerMe.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_VolunteerMe.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD8D57B11F87F33700497D5A /* VolunteerMe.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = VolunteerMe.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DD8D57B41F87F33700497D5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		DD8D57B61F87F33700497D5A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		DD8D57B91F87F33700497D5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		DD8D57BB1F87F33700497D5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD8D57BE1F87F33700497D5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -43,6 +45,7 @@
 		98328CC81F8C785C004A0BEC /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				9842341A1F8ECAEC00FF05BB /* FeedCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -50,6 +53,7 @@
 		98328CC91F8C7871004A0BEC /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				984234181F8ECA6600FF05BB /* VolunteerFeedViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -86,7 +90,6 @@
 				98328CC91F8C7871004A0BEC /* ViewControllers */,
 				98328CC81F8C785C004A0BEC /* Views */,
 				DD8D57B41F87F33700497D5A /* AppDelegate.swift */,
-				DD8D57B61F87F33700497D5A /* ViewController.swift */,
 				DD8D57B81F87F33700497D5A /* Main.storyboard */,
 				DD8D57BB1F87F33700497D5A /* Assets.xcassets */,
 				DD8D57BD1F87F33700497D5A /* LaunchScreen.storyboard */,
@@ -251,8 +254,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				DD8D57B71F87F33700497D5A /* ViewController.swift in Sources */,
+				9842341B1F8ECAEC00FF05BB /* FeedCell.swift in Sources */,
 				DD8D57B51F87F33700497D5A /* AppDelegate.swift in Sources */,
+				984234191F8ECA6600FF05BB /* VolunteerFeedViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -377,6 +381,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = VolunteerMe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepath.VolunteerMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -390,6 +395,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = VolunteerMe/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.codepath.VolunteerMe;
 				PRODUCT_NAME = "$(TARGET_NAME)";
