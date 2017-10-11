@@ -10,7 +10,7 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Volunteer Feed View Controller-->
+        <!--VolunteerMe-->
         <scene sceneID="tne-QT-ifu">
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="VolunteerFeedViewController" customModule="VolunteerMe" customModuleProvider="target" sceneMemberID="viewController">
@@ -33,7 +33,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="149"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="RT9-vO-x9l">
+                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="United_Way_of_Canada" translatesAutoresizingMaskIntoConstraints="NO" id="RT9-vO-x9l">
                                                     <rect key="frame" x="8" y="8" width="75" height="75"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="75" id="0Km-ID-hXT"/>
@@ -52,8 +52,8 @@
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11:00 am - 12: 30 am" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aAA-r9-E6g">
-                                                    <rect key="frame" x="249" y="35" width="110" height="14"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="11:00 am - 12:30 am" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aAA-r9-E6g">
+                                                    <rect key="frame" x="252.5" y="35" width="106.5" height="14"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                     <color key="textColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                                     <nil key="highlightedColor"/>
@@ -92,6 +92,14 @@
                                                 <constraint firstItem="gsS-va-y6Y" firstAttribute="top" secondItem="aAA-r9-E6g" secondAttribute="bottom" constant="8" id="z9U-bm-swP"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="dateLabel" destination="xAt-J6-5hq" id="Dxt-AR-aEg"/>
+                                            <outlet property="eventTimeLabel" destination="aAA-r9-E6g" id="7kg-PP-lHf"/>
+                                            <outlet property="feedDescriptionLabel" destination="gsS-va-y6Y" id="JTA-eu-rfo"/>
+                                            <outlet property="feedTitleLabel" destination="vtX-YR-xKB" id="UBf-FU-GB7"/>
+                                            <outlet property="profileImage" destination="RT9-vO-x9l" id="1E0-Rt-2lU"/>
+                                            <outlet property="tagsLabel" destination="bTB-vM-Ilt" id="QTj-dC-Rj7"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -104,7 +112,10 @@
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="biS-Fi-NJp" secondAttribute="bottom" id="uxC-Yt-pZ4"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="370-3O-I5X"/>
+                    <navigationItem key="navigationItem" title="VolunteerMe" id="370-3O-I5X">
+                        <barButtonItem key="leftBarButtonItem" title="Profile" id="2H8-SE-7Yo"/>
+                        <barButtonItem key="rightBarButtonItem" title="Filter" id="4vz-1h-gCe"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="biS-Fi-NJp" id="oc2-M7-nFg"/>
                     </connections>
@@ -132,4 +143,7 @@
             <point key="canvasLocation" x="32.799999999999997" y="38.23088455772114"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="United_Way_of_Canada" width="376" height="384"/>
+    </resources>
 </document>

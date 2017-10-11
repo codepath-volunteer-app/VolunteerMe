@@ -142,6 +142,7 @@
 				TargetAttributes = {
 					DD8D57B01F87F33700497D5A = {
 						CreatedOnToolsVersion = 8.3.3;
+						DevelopmentTeam = 6VDG77DH63;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -380,6 +381,7 @@
 			baseConfigurationReference = 7AE2E20A6EA74598B004DB2D /* Pods-VolunteerMe.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6VDG77DH63;
 				INFOPLIST_FILE = VolunteerMe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -394,6 +396,7 @@
 			baseConfigurationReference = 2A45DFAE001ECB1D1A662734 /* Pods-VolunteerMe.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				DEVELOPMENT_TEAM = 6VDG77DH63;
 				INFOPLIST_FILE = VolunteerMe/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

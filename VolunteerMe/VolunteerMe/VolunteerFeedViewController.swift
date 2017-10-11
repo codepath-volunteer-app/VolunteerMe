@@ -31,12 +31,14 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
     
     // MARK: - Table View Delegate
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 0
+        return 2
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell") as! FeedCell
         //cell.colorLabel.text = data[indexPath.row]
+        cell.feedDescriptionLabel.text = "This is the best charity to work for. Don't waste your saturday on cleaning alone. Make it more productive, give a sandwich. "
+        cell.tagsLabel.text = "Tags: Help, #forever, #Sandwich, #Carrots, #HELP, #Saturday"
         return cell
     }
     
