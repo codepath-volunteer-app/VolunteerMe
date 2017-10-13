@@ -8,7 +8,7 @@
 
 import UIKit
 
-class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FilterViewControllerDelegate {
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -47,14 +47,39 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        let navigationController = segue.destination as! UINavigationController
+        let filterVC = navigationController.topViewController as! FilterViewController
+        filterVC.delegate = self
     }
-    */
+    
+    // MARK: - Delegate
+    func filterViewController(filterViewController: FilterViewController, didUpdateFilters filter: [String: Any]){
+        let categories = filter["categories"] as? [String]
+        let isDeal = filter["deals"] as? Bool
+        let sortBy = filter["sortBy"] as! [String]
+        let distance = filter["distance"] as! Int
+        print(categories ?? [])
+        print(isDeal ?? true)
+        print(sortBy)
+        print(distance)
+        
+        // Call the search data method here and update the tableView. 
+        
+//        // If any previous calls are still going
+//        MBProgressHUD.hide(for: self.view, animated: true)
+//        MBProgressHUD.showAdded(to: self.view, animated: true)
+//        Business.searchWithTerm(term: "Resturants", offset: 0, sort: sortBy, categories: categories, deals: isDeal, radius: distance) { (businesses, error) in
+//            self.businesses = businesses
+//            self.tableView.reloadData()
+//            MBProgressHUD.hide(for: self.view, animated: true)
+//        }
+    }
 
 }
