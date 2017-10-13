@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import UIColor_Hex_Swift
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -19,6 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         initializeParse()
+        customAppearance()
 
         return true
     }
@@ -53,6 +55,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 configuration.server = self.serverEndpointUrl
             })
         )
+    }
+    
+    // Change app color here
+    func customAppearance(){
+        
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.barTintColor = UIColor("#0084b4")
+        navigationBarAppearace.tintColor = UIColor("#ffffff")
+        navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName : UIColor("#ffffff")]
     }
 }
 
