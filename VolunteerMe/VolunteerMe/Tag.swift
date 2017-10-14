@@ -13,6 +13,10 @@ class Tag: PFObject, PFSubclassing {
     // name of tag
     @NSManaged var name: String?
 
+    class func parseClassName() -> String {
+        return "Tag"
+    }
+
     class func createNewTag(name: String, successCallback: @escaping (Tag, Error?) -> ()) -> () {
         let tag = Tag()
         tag.name = name
@@ -39,7 +43,5 @@ class Tag: PFObject, PFSubclassing {
         }
     }
 
-    class func parseClassName() -> String {
-        return "Tag"
-    }
+    
 }
