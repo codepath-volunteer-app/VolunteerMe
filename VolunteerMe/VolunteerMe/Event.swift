@@ -17,14 +17,17 @@ class Event:PFObject, PFSubclassing {
     @NSManaged var eventDescription: String?
     @NSManaged var imageUrl: String?
     @NSManaged var location: PFGeoPoint?
+
+    // unix timestamp representing datetime of event
+    @NSManaged var datetime: String?
     var maxAttendees: Int?
 
-    class func createEvent(name: String?, eventDescription: String?, imageUrl: String?, maxAttendees: Int?, latLong: (Double, Double)?, successCallback: @escaping (Event, Error?) -> ()) -> (){
+    class func createEvent(name: String, datetime: String, latLong: (Double, Double), eventDescription: String?, imageUrl: String?, maxAttendees: Int?, successCallback: @escaping (Event, Error?) -> ()) -> (){
         let event = Event()
-
-        if let name = name {
-            event.name = name
-        }
+        event.name = name
+        event.datetime = datetime
+        let (lat, long) = latLong
+        event.location = PFGeoPoint(latitude: lat, longitude: long)
 
         if let eventDescription = eventDescription {
             event.eventDescription = eventDescription
@@ -38,12 +41,6 @@ class Event:PFObject, PFSubclassing {
             event.maxAttendees = maxAttendees
         } else {
             event.maxAttendees = Event.DEFAULT_MAX_ATTENDEES
-        }
-    
-        if let latLong = latLong {
-            let (lat, long) = latLong
-
-            event.location = PFGeoPoint(latitude: lat, longitude: long)
         }
 
         event.saveInBackground { (success: Bool, error: Error?) in
