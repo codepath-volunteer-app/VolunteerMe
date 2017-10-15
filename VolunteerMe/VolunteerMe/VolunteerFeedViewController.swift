@@ -52,16 +52,22 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
-    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-        let navigationController = segue.destination as! UINavigationController
-        let filterVC = navigationController.topViewController as! FilterViewController
-        filterVC.delegate = self
+        if segue.identifier == "showEventDetails" {
+            // let cell = sender as! FeedCell
+            // let eventDetailsController = segue.destination as! EventDetailsViewController
+            // eventDetailsController.event = cell.event
+
+        } else if segue.identifier == "filterSeque" {
+            // Get the new view controller using segue.destinationViewController.
+            // Pass the selected object to the new view controller.
+            let navigationController = segue.destination as! UINavigationController
+            let filterVC = navigationController.topViewController as! FilterViewController
+            filterVC.delegate = self
+        }
     }
     
     // MARK: - Delegate
