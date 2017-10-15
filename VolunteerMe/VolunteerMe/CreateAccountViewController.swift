@@ -31,7 +31,7 @@ class CreateAccountViewController: UIViewController {
       createAccountButtonBackground.backgroundColor = Color.PRIMARY_COLOR
       createAccountButtonBackground.layer.cornerRadius = 8.0
       createAccountButtonBackground.clipsToBounds = true
-      createAccountButtonLabel.textColor = Color.PRIMARY_COLOR
+      createAccountButtonLabel.textColor = Color.WHITE
 
       var i = 0
       for tag in tags {

@@ -143,9 +143,9 @@
                         <outlet property="loginButtonText" destination="3A0-z4-xsQ" id="Pxj-nJ-sVG"/>
                         <outlet property="passwordField" destination="QJz-YK-cda" id="Ubu-sk-gK9"/>
                         <outlet property="passwordUnderline" destination="1Zt-RK-P81" id="SZN-ys-d55"/>
-                        <outlet property="subtitle" destination="aGJ-GT-qro" id="gir-sk-jPx"/>
-                        <outlet property="title" destination="7tC-Zu-Q09" id="7gj-2G-gaN"/>
-                        <outlet property="username" destination="UGN-XL-LZG" id="uVK-Hb-wuS"/>
+                        <outlet property="subtitleText" destination="aGJ-GT-qro" id="Ive-NY-ImF"/>
+                        <outlet property="titleText" destination="7tC-Zu-Q09" id="7YY-Tg-YfP"/>
+                        <outlet property="usernameField" destination="UGN-XL-LZG" id="IdC-Up-gQc"/>
                         <outlet property="usernameUnderline" destination="o8h-O6-xBv" id="D3e-U6-389"/>
                     </connections>
                 </viewController>
@@ -293,8 +293,8 @@
                         <outlet property="loginButtonText" destination="f6m-Bt-6fl" id="UpW-cM-Fwv"/>
                         <outlet property="passwordTextField" destination="qze-ng-hr0" id="iYy-0F-6NU"/>
                         <outlet property="passwordUnderline" destination="7vc-sR-Uwa" id="u1Z-4d-AdL"/>
-                        <outlet property="subtitle" destination="0Ta-Kk-9fP" id="eEY-et-sUc"/>
-                        <outlet property="title" destination="iCN-q0-YXb" id="Pml-ID-O8k"/>
+                        <outlet property="subtitleText" destination="0Ta-Kk-9fP" id="54N-8d-9xd"/>
+                        <outlet property="titleText" destination="iCN-q0-YXb" id="acg-ny-Rz4"/>
                         <outlet property="usernameTextField" destination="4qe-Vf-9hJ" id="cPv-rm-gV3"/>
                         <outlet property="usernameUnderline" destination="HFW-Ox-8HY" id="mCR-pw-o6u"/>
                     </connections>
@@ -501,9 +501,9 @@
                         <outlet property="createAccountButtonLabel" destination="lDb-mB-6BS" id="USR-tX-Jw0"/>
                         <outlet property="passwordField" destination="YjL-1W-qhC" id="Wdc-1B-FK3"/>
                         <outlet property="passwordUnderline" destination="tUA-Vt-21L" id="zcJ-RO-o3D"/>
-                        <outlet property="subtitle" destination="qKT-UO-abc" id="i2l-Ab-BNQ"/>
+                        <outlet property="subtitleText" destination="qKT-UO-abc" id="MCx-Za-Xm2"/>
                         <outlet property="tagsView" destination="bS2-Gy-ED1" id="bbY-IB-6Ex"/>
-                        <outlet property="title" destination="pV7-jk-RtT" id="C1b-Yy-U7O"/>
+                        <outlet property="titleText" destination="pV7-jk-RtT" id="8XM-hl-hFy"/>
                         <outlet property="usernameField" destination="Chm-pK-Fzh" id="yzD-74-aLq"/>
                         <outlet property="usernameUnderline" destination="Uji-9g-l6C" id="GAN-CJ-h7s"/>
                         <outletCollection property="tags" destination="iL6-78-QT0" collectionClass="NSMutableArray" id="n0A-FH-yzv"/>
@@ -651,8 +651,8 @@
                         <outlet property="createAccountButtonText" destination="FpW-Lx-Tbx" id="aWx-Rl-P4o"/>
                         <outlet property="passwordField" destination="ShG-WH-feo" id="yVy-Zh-pL8"/>
                         <outlet property="passwordUnderline" destination="Mhq-64-3jj" id="JAD-Vw-qLD"/>
-                        <outlet property="subtitleText" destination="BpB-dU-gJ3" id="niS-dg-GaI"/>
-                        <outlet property="titleText" destination="7of-kE-VZf" id="8Pf-iZ-uA1"/>
+                        <outlet property="subtitleText" destination="BpB-dU-gJ3" id="Jk0-p6-uQG"/>
+                        <outlet property="titleText" destination="7of-kE-VZf" id="SbT-ls-gbh"/>
                         <outlet property="usernameField" destination="JPB-f8-nyY" id="EdB-PA-Vbw"/>
                         <outlet property="usernameUnderline" destination="bTj-fw-pUd" id="9aY-aB-1AS"/>
                     </connections>
