@@ -28,6 +28,7 @@ class CreateAccountViewController: UIViewController {
       subtitleText.textColor = Color.PRIMARY_COLOR
       usernameUnderline.backgroundColor = Color.PRIMARY_COLOR
       passwordUnderline.backgroundColor = Color.PRIMARY_COLOR
+
       createAccountButtonBackground.backgroundColor = Color.PRIMARY_COLOR
       createAccountButtonBackground.layer.cornerRadius = 8.0
       createAccountButtonBackground.clipsToBounds = true

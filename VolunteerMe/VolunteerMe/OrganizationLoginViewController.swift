@@ -29,9 +29,12 @@ class OrganizationLoginViewController: UIViewController {
       subtitleText.textColor = Color.PRIMARY_COLOR
       usernameUnderline.backgroundColor = Color.PRIMARY_COLOR
       passwordUnderline.backgroundColor = Color.PRIMARY_COLOR
+
       loginButtonBackground.backgroundColor = Color.PRIMARY_COLOR
       loginButtonBackground.layer.cornerRadius = 8.0
+      loginButtonBackground.clipsToBounds = true
       loginButtonText.textColor = Color.WHITE
+
       createAccountButtonBackground.backgroundColor = Color.WHITE
       createAccountButtonBackground.layer.cornerRadius = 8.0
       createAccountButtonBackground.layer.borderColor = Color.PRIMARY_COLOR.cgColor

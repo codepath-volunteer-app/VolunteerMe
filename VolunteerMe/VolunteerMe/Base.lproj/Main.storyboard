@@ -155,7 +155,11 @@
                         <segue destination="TMy-Ou-SQQ" kind="presentation" id="rLA-j8-q6B"/>
                     </connections>
                 </tapGestureRecognizer>
-                <tapGestureRecognizer id="cfP-Oy-Lei" userLabel="LoginButtonTapGesture"/>
+                <tapGestureRecognizer id="cfP-Oy-Lei" userLabel="LoginButtonTapGesture">
+                    <connections>
+                        <segue destination="5QU-o9-vad" kind="show" id="Ed0-t6-jLl"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="1734" y="-716"/>
         </scene>
@@ -308,6 +312,7 @@
                 <tapGestureRecognizer id="tfR-L6-hha" userLabel="LoginButtonTapped">
                     <connections>
                         <action selector="loginButtonTapped:" destination="aux-lb-eXw" id="58p-ld-gFb"/>
+                        <segue destination="5QU-o9-vad" kind="show" id="Vkq-dM-i06"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -773,6 +778,7 @@
                                             <outlet property="feedTitleLabel" destination="vtX-YR-xKB" id="UBf-FU-GB7"/>
                                             <outlet property="profileImage" destination="RT9-vO-x9l" id="1E0-Rt-2lU"/>
                                             <outlet property="tagsLabel" destination="bTB-vM-Ilt" id="QTj-dC-Rj7"/>
+                                            <segue destination="2fH-w3-zc8" kind="show" identifier="showEventDetails" id="3vv-EN-P7q"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -814,7 +820,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="PIW-R8-tBd">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="United_Way_of_Canada" translatesAutoresizingMaskIntoConstraints="NO" id="PIW-R8-tBd">
                                 <rect key="frame" x="8" y="72" width="125" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="n8o-7k-pfF"/>
@@ -909,16 +915,19 @@
                     </view>
                     <navigationItem key="navigationItem" id="cZM-MA-TLt"/>
                     <connections>
-                        <outlet property="description" destination="CBa-Q3-wyH" id="KwQ-qb-Cvh"/>
+                        <outlet property="descriptionText" destination="CBa-Q3-wyH" id="nQy-Hg-YvP"/>
+                        <outlet property="eventDate" destination="EkQ-u2-pKq" id="QoB-TQ-7Ju"/>
                         <outlet property="eventImage" destination="PIW-R8-tBd" id="7O0-oi-Uve"/>
+                        <outlet property="eventTime" destination="AD7-lM-SYE" id="oY3-nZ-P6c"/>
                         <outlet property="map" destination="Rhp-NV-AmE" id="ZpH-8W-LpP"/>
                         <outlet property="registerButtonBackground" destination="9yv-jV-tiU" id="eWF-y4-1hp"/>
                         <outlet property="registerButtonLabel" destination="m6t-t1-FXn" id="4WQ-XI-Zws"/>
+                        <outlet property="titleText" destination="ANE-gu-ODG" id="NFu-Hc-Le3"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="G6b-9v-4Ll" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1924" y="774.06296851574223"/>
+            <point key="canvasLocation" x="972" y="757"/>
         </scene>
         <!--Filter-->
         <scene sceneID="fiw-V8-VEm">
@@ -1064,7 +1073,7 @@
         <scene sceneID="cH9-0T-CM7">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="O95-qU-w1y" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Volunteer" id="WSn-9D-gmn"/>
+                    <tabBarItem key="tabBarItem" title="Volunteer" image="profile-icon" id="WSn-9D-gmn"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="cms-Sl-8du">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1101,7 +1110,7 @@
         <scene sceneID="Rr9-dW-VLF">
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hJ8-Qs-hBl" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Organization" id="8gY-62-Gpc"/>
+                    <tabBarItem key="tabBarItem" title="Organization" image="volunteer-icon" id="8gY-62-Gpc"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="2iJ-8Z-8ca">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
@@ -1115,24 +1124,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oNp-td-IpA" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="984.79999999999995" y="-716.49175412293857"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="fEs-5W-f8s">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="8C8-al-5c0" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="HzB-5s-fil">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="2fH-w3-zc8" kind="relationship" relationship="rootViewController" id="dKA-rp-1bs"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OKj-Dm-siz" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="984.79999999999995" y="774.06296851574223"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="s1K-iW-eRc">
@@ -1155,5 +1146,10 @@
     </scenes>
     <resources>
         <image name="United_Way_of_Canada" width="376" height="384"/>
+        <image name="profile-icon" width="25" height="25"/>
+        <image name="volunteer-icon" width="25" height="25"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="Ed0-t6-jLl"/>
+    </inferredMetricsTieBreakers>
 </document>

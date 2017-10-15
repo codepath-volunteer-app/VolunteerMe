@@ -10,17 +10,30 @@ import UIKit
 
 class EventDetailsViewController: UIViewController {
 
+  @IBOutlet weak var titleText: UILabel!
+  @IBOutlet weak var eventDate: UILabel!
+  @IBOutlet weak var eventTime: UILabel!
   @IBOutlet weak var eventImage: UIImageView!
   @IBOutlet weak var registerButtonBackground: UIView!
   @IBOutlet weak var registerButtonLabel: UILabel!
   @IBOutlet weak var descriptionText: UILabel!
   @IBOutlet weak var map: UIView!
 
+  var event: Event? {
+    didSet {
+      titleText.text = event?.name
+      eventDate.text = event?.datetime
+      eventTime.text = event?.datetime
+      // eventImage.image = event.imageUrl
+
+    }
+  }
 
     override func viewDidLoad() {
         super.viewDidLoad()
       registerButtonBackground.backgroundColor = Color.PRIMARY_COLOR
       registerButtonBackground.layer.cornerRadius = 8.0
+      registerButtonBackground.clipsToBounds = true
 
 
         // Do any additional setup after loading the view.
