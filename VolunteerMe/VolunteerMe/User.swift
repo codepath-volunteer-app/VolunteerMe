@@ -31,7 +31,7 @@ class User: PFUser {
         }
     }
 
-    class func createNewUser(username:String, password: String, name: String?, userDescription: String?, userType: UserType?, profilePictureUrl: String?, tags: [String]?, successCallback: @escaping (User, Error?) -> ()) -> () {
+    class func createNewUser(username:String, password: String, name: String?, userDescription: String?, userType: UserType?, profilePictureUrl: String?, tags: [String]?, successCallback: @escaping (User) -> ()) -> () {
         let user = User()
         user.username = username
         user.password = password
@@ -63,24 +63,24 @@ class User: PFUser {
         user.signUpInBackground() {
             (success: Bool, error: Error?) in
             if success {
-                successCallback(user, error)
+                successCallback(user)
             } else if error != nil {
                 print(error?.localizedDescription)
             }
         }
     }
     
-    class func login(username: String, password: String, successCallback: @escaping (User, Error?) -> ()) -> () {
+    class func login(username: String, password: String, successCallback: @escaping (User) -> ()) -> () {
         logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) in
             if let error = error {
                 print("User log in failed: \(error.localizedDescription)")
             } else {
-                successCallback(user as! User, error)
+                successCallback(user as! User)
             }
             }
     }
 
-    func update(name: String?, userDescription: String?, userType: UserType?, profilePictureUrl: String?, tags: [String]?, successCallback: @escaping (User, Error?) -> ()) -> () {
+    func update(name: String?, userDescription: String?, userType: UserType?, profilePictureUrl: String?, tags: [String]?, successCallback: @escaping (User) -> ()) -> () {
         if let name = name {
             self.name = name
         }
@@ -108,7 +108,7 @@ class User: PFUser {
         saveInBackground() {
             (success: Bool, error: Error?) in
             if success {
-                successCallback(self, error)
+                successCallback(self)
             } else if error != nil {
                 print(error?.localizedDescription)
             }

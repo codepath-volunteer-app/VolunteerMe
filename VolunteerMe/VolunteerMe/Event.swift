@@ -22,7 +22,7 @@ class Event:PFObject, PFSubclassing {
     @NSManaged var datetime: String?
     var maxAttendees: Int?
 
-    class func createEvent(name: String, datetime: String, latLong: (Double, Double), eventDescription: String?, imageUrl: String?, maxAttendees: Int?, successCallback: @escaping (Event, Error?) -> ()) -> (){
+    class func createEvent(name: String, datetime: String, latLong: (Double, Double), eventDescription: String?, imageUrl: String?, maxAttendees: Int?, successCallback: @escaping (Event) -> ()) -> (){
         let event = Event()
         event.name = name
         event.datetime = datetime
@@ -45,7 +45,7 @@ class Event:PFObject, PFSubclassing {
 
         event.saveInBackground { (success: Bool, error: Error?) in
             if success {
-                successCallback(event, error)
+                successCallback(event)
             } else if error != nil {
                 print(error?.localizedDescription)
             }
@@ -53,7 +53,7 @@ class Event:PFObject, PFSubclassing {
     }
 
     // Uses current location to find events
-    class func findEventsNearby(radiusInMiles: Double, successCallback: @escaping ([Event], Error?) -> ()) -> () {
+    class func findEventsNearby(radiusInMiles: Double, successCallback: @escaping ([Event]) -> ()) -> () {
         PFGeoPoint.geoPointForCurrentLocation { (geoPoint: PFGeoPoint?, error: Error?) in
             if let geoPoint = geoPoint {
                 Event.findEventsNearLocation(radiusInMiles: radiusInMiles, targetLocation: (geoPoint.latitude, geoPoint.longitude), successCallback: successCallback)
@@ -63,7 +63,7 @@ class Event:PFObject, PFSubclassing {
         }
     }
 
-    class func findEventsNearLocation(radiusInMiles: Double, targetLocation: (Double, Double), successCallback: @escaping ([Event], Error?) -> ()) -> () {
+    class func findEventsNearLocation(radiusInMiles: Double, targetLocation: (Double, Double), successCallback: @escaping ([Event]) -> ()) -> () {
         let (lat, long) = targetLocation
         let geoPoint = PFGeoPoint(latitude: lat, longitude: long)
         let query = PFQuery(className: "Event")
@@ -71,7 +71,7 @@ class Event:PFObject, PFSubclassing {
         query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
             if let results = results {
                 let events = results as! [Event]
-                successCallback(events, error)
+                successCallback(events)
             } else if error != nil {
                 print(error?.localizedDescription)
             }

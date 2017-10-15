@@ -17,31 +17,31 @@ class Tag: PFObject, PFSubclassing {
         return "Tag"
     }
 
-    class func createNewTag(name: String, successCallback: @escaping (Tag, Error?) -> ()) -> () {
+    class func createNewTag(name: String, successCallback: @escaping (Tag) -> ()) -> () {
         let tag = Tag()
         tag.name = name
 
         tag.saveInBackground { (success, error) in
             if success {
-                successCallback(tag, error)
+                successCallback(tag)
             } else if error != nil {
                 print(error?.localizedDescription)
             }
         }
     }
 
-    class func findTagsByNameArray(_ arrayOfTagNames: [String]) -> [Tag] {
+    class func findTagsByNameArray(_ arrayOfTagNames: [String], successCallback: @escaping ([Tag]) -> ()) -> () {
         let query = PFQuery(className: "Tag")
         query.whereKey("name", containedIn: arrayOfTagNames)
-        do {
-            let tags = try query.findObjects()
-            print(tags)
-            
-            return tags as! [Tag]
-        } catch {
-            return []
+        
+        query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
+            if let results = results {
+                let tags = results as! [Tag]
+                
+                successCallback(tags)
+            } else if error != nil {
+                print(error?.localizedDescription)
+            }
         }
     }
-
-    
 }

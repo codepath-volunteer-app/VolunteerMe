@@ -30,26 +30,53 @@ class EventAttendee: PFObject, PFSubclassing {
         return newEventAttendee
     }
 
-    class func getEventsForUser(user: User) -> [Event] {
+    class func getEventsForUser(user: User, successCallback: @escaping ([Event]) -> ()) -> () {
         let query = PFQuery(className: "EventAttendee")
         query.whereKey("user", equalTo: user)
         var eventAttendees: [EventAttendee] = []
-        var events: [Event] = []
 
-        do {
-            eventAttendees = try query.findObjects() as! [EventAttendee]
-        } catch {
-            // unexpected, find nothing
-        }
-    
-        for eventAttendee in eventAttendees {
-            let event = eventAttendee.object(forKey: "event")
-            
-            if let event = event {
-                events.append(event as! Event)
+        query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
+            if let results = results {
+                let eventAttendees = results as! [EventAttendee]
+                var events: [Event] = []
+
+                for eventAttendee in eventAttendees {
+                    let event = eventAttendee.object(forKey: "event")
+                    
+                    if let event = event {
+                        events.append(event as! Event)
+                    }
+                }
+
+                successCallback(events)
+            } else if error != nil {
+                print(error?.localizedDescription)
             }
         }
+    }
+
+    class func getUsersForEvent(event: Event, successCallback: @escaping ([User]) -> ()) -> () {
+        let query = PFQuery(className: "EventAttendee")
+        query.whereKey("event", equalTo: event)
+        var eventAttendees: [EventAttendee] = []
         
-        return events
+        query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
+            if let results = results {
+                let eventAttendees = results as! [EventAttendee]
+                var users: [User] = []
+                
+                for eventAttendee in eventAttendees {
+                    let user = eventAttendee.object(forKey: "user")
+                    
+                    if let user = user {
+                        users.append(user as! User)
+                    }
+                }
+                
+                successCallback(users)
+            } else if error != nil {
+                print(error?.localizedDescription)
+            }
+        }
     }
 }
