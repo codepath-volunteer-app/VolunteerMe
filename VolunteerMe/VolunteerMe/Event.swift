@@ -21,7 +21,7 @@ class Event:PFObject, PFSubclassing {
 
     // unix timestamp representing datetime of event
     @NSManaged var datetime: String?
-    var maxAttendees: Int?
+    var maxAttendees: Int = Event.DEFAULT_MAX_ATTENDEES
     var tags: [Tag] {
         get {
             do {
@@ -31,6 +31,11 @@ class Event:PFObject, PFSubclassing {
             } catch {
                 return []
             }
+        }
+    }
+    var attendees: [User] {
+        get {
+            return EventAttendee.getUsersForEventSync(self)
         }
     }
 
@@ -115,5 +120,9 @@ class Event:PFObject, PFSubclassing {
     
     class func parseClassName() -> String {
         return "Event"
+    }
+
+    func getRemainingSpots() -> Int {
+        return Event.DEFAULT_MAX_ATTENDEES - attendees.count
     }
 }

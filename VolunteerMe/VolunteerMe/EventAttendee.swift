@@ -79,4 +79,27 @@ class EventAttendee: PFObject, PFSubclassing {
             }
         }
     }
+
+    class func getUsersForEventSync(_ event: Event) -> [User] {
+        let query = PFQuery(className: "EventAttendee")
+        query.whereKey("event", equalTo: event)
+        var eventAttendees: [EventAttendee] = []
+        var users: [User] = []
+
+        do {
+            eventAttendees = try query.findObjects() as! [EventAttendee]
+        } catch {
+            // Print error later
+        }
+
+        for eventAttendee in eventAttendees {
+            let user = eventAttendee.object(forKey: "user")
+            
+            if let user = user {
+                users.append(user as! User)
+            }
+        }
+
+        return users
+    }
 }
