@@ -53,7 +53,7 @@ class User: PFUser {
         }
 
         if let tags = tags {
-            let foundTags = Tag.findTagsByNameArray(tags)
+            let foundTags = Tag.findTagsByNameArraySync(tags)
             let relation = user.relation(forKey: "interests")
             for tag in foundTags {
                 relation.add(tag)
@@ -98,7 +98,7 @@ class User: PFUser {
         }
         
         if let tags = tags {
-            let foundTags = Tag.findTagsByNameArray(tags)
+            let foundTags = Tag.findTagsByNameArraySync(tags)
             let relation = self.relation(forKey: "interests")
             for tag in foundTags {
                 relation.add(tag)

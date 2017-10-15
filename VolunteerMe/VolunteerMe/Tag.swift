@@ -44,4 +44,19 @@ class Tag: PFObject, PFSubclassing {
             }
         }
     }
+
+    // Synchronous version of findTagsByNameArray
+    class func findTagsByNameArraySync(_ arrayOfTagNames: [String]) -> [Tag] {
+        let query = PFQuery(className: "Tag")
+        query.whereKey("name", containedIn: arrayOfTagNames)
+        var tags: [Tag] = []
+
+        do {
+            tags = try query.findObjects() as! [Tag]
+        } catch {
+            // Do nothing
+        }
+
+        return tags
+    }
 }
