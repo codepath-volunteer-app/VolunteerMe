@@ -18,6 +18,7 @@ class EventAttendee: PFObject, PFSubclassing {
         return "EventAttendee"
     }
 
+    // TODO: account for max attendees
     class func createNewEventAttendee(user: User, event: Event) -> EventAttendee {
         let newEventAttendee = EventAttendee()
         
