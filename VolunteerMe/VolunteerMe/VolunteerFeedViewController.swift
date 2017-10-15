@@ -8,8 +8,10 @@
 
 import UIKit
 
-class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FilterViewControllerDelegate {
+class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, FilterViewControllerDelegate, UISearchBarDelegate, UISearchResultsUpdating {
     @IBOutlet weak var tableView: UITableView!
+    
+    let searchController = UISearchController(searchResultsController: nil)
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,6 +21,9 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
         // Configure tableView.
         tableView.estimatedRowHeight = 200
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        
+        //Configure Search Bar
+        configSearchBarAboveTable()
 
         // Do any additional setup after loading the view.
     }
@@ -81,5 +86,31 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
 //            MBProgressHUD.hide(for: self.view, animated: true)
 //        }
     }
+    
+    //MARK: - SEARCH BAR
+    func configSearchBarAboveTable(){
+        searchController.searchResultsUpdater = self
+        searchController.dimsBackgroundDuringPresentation = false
+        definesPresentationContext = true
+        tableView.tableHeaderView = searchController.searchBar
+    }
+    
+    public func updateSearchResults(for searchController: UISearchController) {
+        if let searchText = searchController.searchBar.text {
+            print("Search Text: \(searchText)")
+            // todo: get data here
+        }
+        
+    }
+    
+    // ToDo: Phase 2
+    public func willPresentSearchController(_ searchController: UISearchController){
+        // Save the previous data set into a temp Array
+        print("About to go to controller")
+    }
 
+    public func didDismissSearchController(_ searchController: UISearchController) {
+        // When cancelled show the previous data set
+        print("done from the controller")
+    }
 }
