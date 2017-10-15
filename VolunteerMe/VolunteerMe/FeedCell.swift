@@ -10,7 +10,7 @@ import UIKit
 
 class FeedCell: UITableViewCell {
     @IBOutlet weak var profileImage: UIImageView!
-
+    
     @IBOutlet weak var tagsLabel: UILabel!
     @IBOutlet weak var feedTitleLabel: UILabel!
     @IBOutlet weak var dateLabel: UILabel!
@@ -24,11 +24,11 @@ class FeedCell: UITableViewCell {
         profileImage.layer.cornerRadius = 5
         profileImage.clipsToBounds = true
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         // Configure the view for the selected state
     }
-
+    
 }
