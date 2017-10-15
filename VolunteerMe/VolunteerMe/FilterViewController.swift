@@ -1,6 +1,6 @@
 //
 //  FilterViewController.swift
-//  Yelp
+//  VolunteerMe
 //
 //  Created by Rajat Bhargava on 9/22/17.
 //  Copyright © 2017 RNR. All rights reserved.
@@ -9,7 +9,7 @@
 import UIKit
 
 @objc protocol FilterViewControllerDelegate {
-  @objc optional func filterViewController(filterViewController: FilterViewController, didUpdateFilters filter: [String: Any])
+    @objc optional func filterViewController(filterViewController: FilterViewController, didUpdateFilters filter: [String: Any])
 }
 
 struct SectionStruct {
@@ -21,7 +21,7 @@ struct SectionStruct {
 }
 
 class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, SwitchCellDelegate {
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     let dealsSection: SectionStruct = SectionStruct(headerTitle: "Deals", cellType: "switchCell",
@@ -33,13 +33,13 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                                              ("10 miles", 16100), ("20 miles", 32187)],
                                                        results:[Int: Bool](), checked_index: 0)
     let sortBySection: SectionStruct = SectionStruct(headerTitle: "SortBy", cellType: "filterCell",
-                                                       data:[("Best Match", "Best Match"), ("Distance", "distance"),
-                                                             ("Highest Rates", "higest Rated")],
-                                                       results:[Int: Bool](), checked_index: 0)
+                                                     data:[("Best Match", "Best Match"), ("Distance", "distance"),
+                                                           ("Highest Rates", "higest Rated")],
+                                                     results:[Int: Bool](), checked_index: 0)
     let categorySection: SectionStruct = SectionStruct(headerTitle: "Category", cellType: "switchCell",
-                                                    data:[("African", "african"), ("Afghan", "afghani"),
-                                                          ("American", "tradamerican"),("Arabic","Arabian"), ("Indian", "indpak")],
-                                                    results:[Int: Bool](), checked_index: 0)
+                                                       data:[("African", "african"), ("Afghan", "afghani"),
+                                                             ("American", "tradamerican"),("Arabic","Arabian"), ("Indian", "indpak")],
+                                                       results:[Int: Bool](), checked_index: 0)
     
     
     var sections: [Int:SectionStruct]?
@@ -50,19 +50,19 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         tableView.dataSource = self
         tableView.delegate = self
         
         sections = [0: dealsSection, 1: distanceSection, 2: sortBySection, 3: categorySection]
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
-
+    
     
     @IBAction func onSearch(_ sender: Any) {
         var filters = [String:Any]()
@@ -99,7 +99,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         //print(sections?[3]?.results)
         dismiss(animated: true, completion: nil)
     }
- 
+    
     @IBAction func onCancel(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -113,9 +113,9 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         } else {
             return sections?[section]?.data!.count ?? 0
         }
-       
+        
     }
-
+    
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let section_index = indexPath.section
@@ -166,14 +166,14 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         cell?.layer.borderColor = UIColor.gray.cgColor
         cell?.layer.cornerRadius = 5
         
-//        switch section_index {
-//        case 1:
-//            //cell = tableView.dequeueReusableCell(withIdentifier: "filterCell") as! FilterCell
-//        case 2:
-//           // cell = tableView.dequeueReusableCell(withIdentifier: "switchCell") as! SwitchCell
-//        default:
-//            //cell = tableView.dequeueReusableCell(withIdentifier: "switchCell") as! SwitchCell
-//        }
+        //        switch section_index {
+        //        case 1:
+        //            //cell = tableView.dequeueReusableCell(withIdentifier: "filterCell") as! FilterCell
+        //        case 2:
+        //           // cell = tableView.dequeueReusableCell(withIdentifier: "switchCell") as! SwitchCell
+        //        default:
+        //            //cell = tableView.dequeueReusableCell(withIdentifier: "switchCell") as! SwitchCell
+        //        }
         return cell!
     }
     
@@ -183,7 +183,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
     }
     
-
+    
     public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         return sections?[section]?.headerTitle
     }
@@ -198,11 +198,11 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if cellType == "filterCell" {
             // if collapsed and its clicked don't change the index
             if !(collapsed[section_index] ?? true){
-               sections?[section_index]?.checked_index = row
+                sections?[section_index]?.checked_index = row
             }
             //toggle collapsed
             collapsed[section_index] = !(collapsed[section_index] ?? true)
-           
+            
         }
         tableView.reloadSections(IndexSet(integer: section_index), with: .automatic)
     }
@@ -220,15 +220,16 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let value: String = sections?[section_index!]?.data![row!].1 as! String
         print("The value selected is:\(value)")
     }
-
+    
     /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     // Get the new view controller using segue.destinationViewController.
+     // Pass the selected object to the new view controller.
+     }
+     */
+    
 }
+
