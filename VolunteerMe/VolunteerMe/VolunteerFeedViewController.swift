@@ -74,11 +74,11 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
     func filterViewController(filterViewController: FilterViewController, didUpdateFilters filter: [String: Any]){
         let categories = filter["categories"] as? [String]
         let isDeal = filter["deals"] as? Bool
-        let sortBy = filter["sortBy"] as! [String]
+       // let sortBy = filter["sortBy"] as! [String]
         let distance = filter["distance"] as! Int
         print(categories ?? [])
         print(isDeal ?? true)
-        print(sortBy)
+       // print(sortBy)
         print(distance)
         
         // Call the search data method here and update the tableView. 
