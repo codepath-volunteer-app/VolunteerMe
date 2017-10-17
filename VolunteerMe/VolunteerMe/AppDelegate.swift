@@ -74,7 +74,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     print(User.current())
     
     // Should preload all the tags at the load of the app
-    Tag.findTagsByNameArray(["fun", "full day", "reading", "arts"]) {
+    Tag.getTagsByNameArray(["fun", "full day", "reading", "arts"]) {
         (tags: [Tag]) in
 
         print("==========================")
@@ -85,7 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    Event.queryNearbyEvents(radiusInMiles: 1, searchString: nil, tags: ["reading"], limit: nil) {
+    Event.getNearbyEvents(radiusInMiles: 1, searchString: nil, tags: ["reading"], limit: nil) {
         (events: [Event]) in
         print("==========================")
         print("query nearby events")
@@ -102,7 +102,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    Event.queryEvents(radiusInMiles: 10, targetLocation: (37.7721234, -122.40529349999997), searchString: nil, tags: ["reading", "fun"], limit: nil) {
+    Event.getEvents(radiusInMiles: 10, targetLocation: (37.7721234, -122.40529349999997), searchString: nil, tags: ["reading", "fun"], limit: nil) {
         (events: [Event]) in
         print("==========================")
         print("query events that can be found")
@@ -137,7 +137,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    Event.queryEvents(radiusInMiles: 10, targetLocation: (37.7721234, -122.40529349999997), searchString: nil, tags: ["full day"], limit: nil) {
+    Event.getEvents(radiusInMiles: 10, targetLocation: (37.7721234, -122.40529349999997), searchString: nil, tags: ["full day"], limit: nil) {
         (events: [Event]) in
         print("==========================")
         print("query events that can not be found")

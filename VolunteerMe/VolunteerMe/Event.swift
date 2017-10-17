@@ -37,7 +37,7 @@ class Event:PFObject, PFSubclassing {
     }
     var attendees: [User] = []
 
-    fileprivate class func _queryEvents(radiusInMiles: Double, targetLocation: (Double, Double), searchString: String?, tags: [Tag]?, limit: Int?, successCallback: @escaping ([Event]) -> ()) -> () {
+    fileprivate class func _getEvents(radiusInMiles: Double, targetLocation: (Double, Double), searchString: String?, tags: [Tag]?, limit: Int?, successCallback: @escaping ([Event]) -> ()) -> () {
         let (lat, long) = targetLocation
         let geoPoint = PFGeoPoint(latitude: lat, longitude: long)
         let query = PFQuery(className: "Event")
@@ -106,7 +106,7 @@ class Event:PFObject, PFSubclassing {
 
     class func createEvent(name: String, datetime: String, latLong: (Double, Double), eventDescription: String?, imageUrl: String?, maxAttendees: Int?, tags: [String]?, successCallback: @escaping (Event) -> ()) -> (){
         if let tags = tags {
-            Tag.findTagsByNameArray(tags) {
+            Tag.getTagsByNameArray(tags) {
                 (tags: [Tag]) in
                 Event._createEvent(name: name, datetime: datetime, latLong: latLong, eventDescription: eventDescription, imageUrl: imageUrl, maxAttendees: maxAttendees, tags: tags, successCallback: successCallback)
             }
@@ -116,24 +116,24 @@ class Event:PFObject, PFSubclassing {
     }
 
     // Uses current location to find events
-    class func queryNearbyEvents(radiusInMiles: Double, searchString: String?, tags: [String]?, limit: Int?, successCallback: @escaping ([Event]) -> ()) -> () {
+    class func getNearbyEvents(radiusInMiles: Double, searchString: String?, tags: [String]?, limit: Int?, successCallback: @escaping ([Event]) -> ()) -> () {
         PFGeoPoint.geoPointForCurrentLocation { (geoPoint: PFGeoPoint?, error: Error?) in
             if let geoPoint = geoPoint {
-                Event.queryEvents(radiusInMiles: radiusInMiles, targetLocation: (geoPoint.latitude, geoPoint.longitude), searchString: searchString, tags: tags, limit: limit, successCallback: successCallback)
+                Event.getEvents(radiusInMiles: radiusInMiles, targetLocation: (geoPoint.latitude, geoPoint.longitude), searchString: searchString, tags: tags, limit: limit, successCallback: successCallback)
             } else if error != nil {
                 print(error?.localizedDescription)
             }
         }
     }
 
-    class func queryEvents(radiusInMiles: Double, targetLocation: (Double, Double), searchString: String?, tags: [String]?, limit: Int?, successCallback: @escaping ([Event]) -> ()) -> () {
+    class func getEvents(radiusInMiles: Double, targetLocation: (Double, Double), searchString: String?, tags: [String]?, limit: Int?, successCallback: @escaping ([Event]) -> ()) -> () {
         if let tags = tags {
-            Tag.findTagsByNameArray(tags) {
+            Tag.getTagsByNameArray(tags) {
                 (tags: [Tag]) in
-                Event._queryEvents(radiusInMiles: radiusInMiles, targetLocation: targetLocation, searchString: searchString, tags: tags, limit: limit, successCallback: successCallback)
+                Event._getEvents(radiusInMiles: radiusInMiles, targetLocation: targetLocation, searchString: searchString, tags: tags, limit: limit, successCallback: successCallback)
             }
         } else {
-            Event._queryEvents(radiusInMiles: radiusInMiles, targetLocation: targetLocation, searchString: searchString, tags: nil, limit: limit, successCallback: successCallback)
+            Event._getEvents(radiusInMiles: radiusInMiles, targetLocation: targetLocation, searchString: searchString, tags: nil, limit: limit, successCallback: successCallback)
         }
     }
 

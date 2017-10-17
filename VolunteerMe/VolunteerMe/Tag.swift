@@ -30,7 +30,7 @@ class Tag: PFObject, PFSubclassing {
         }
     }
 
-    class func findTagsByNameArray(_ arrayOfTagNames: [String], successCallback: @escaping ([Tag]) -> ()) -> () {
+    class func getTagsByNameArray(_ arrayOfTagNames: [String], successCallback: @escaping ([Tag]) -> ()) -> () {
     
         let query = PFQuery(className: "Tag")
         query.whereKey("name", containedIn: arrayOfTagNames)
@@ -46,7 +46,7 @@ class Tag: PFObject, PFSubclassing {
     }
 
     // Synchronous version of findTagsByNameArray
-    class func findTagsByNameArraySync(_ arrayOfTagNames: [String]) -> [Tag] {
+    class func getTagsByNameArraySync(_ arrayOfTagNames: [String]) -> [Tag] {
         let query = PFQuery(className: "Tag")
         query.whereKey("name", containedIn: arrayOfTagNames)
         var tags: [Tag] = []
