@@ -85,7 +85,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    Event.fetchTagsAndFindEvents(radiusInMiles: 10, targetLocation: (37.7721234, -122.40529349999997), searchString: nil, tags: ["reading", "fun"], limit: nil) {
+    Event.queryNearbyEvents(radiusInMiles: 1, searchString: nil, tags: ["reading"], limit: nil) {
+        (events: [Event]) in
+        print("==========================")
+        print("query nearby events")
+        print("==========================")
+        for event in events {
+            event.printHumanReadableTestString()
+            event.getTags() {
+                (tags: [Tag]) in
+                print("==========================")
+                print("tags for found nearby event")
+                print("==========================")
+                print(tags)
+            }
+        }
+    }
+
+    Event.queryEvents(radiusInMiles: 10, targetLocation: (37.7721234, -122.40529349999997), searchString: nil, tags: ["reading", "fun"], limit: nil) {
         (events: [Event]) in
         print("==========================")
         print("query events that can be found")
@@ -102,7 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    Event.fetchTagsAndFindEvents(radiusInMiles: 10, targetLocation: (37.7721234, -122.40529349999997), searchString: nil, tags: ["full day"], limit: nil) {
+    Event.queryEvents(radiusInMiles: 10, targetLocation: (37.7721234, -122.40529349999997), searchString: nil, tags: ["full day"], limit: nil) {
         (events: [Event]) in
         print("==========================")
         print("query events that can not be found")
@@ -116,7 +133,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-//    Event.fetchTagsAndCreateEvent(name: "Reading for Airbnbers", datetime: "1508382695", latLong: (37.7721234, -122.40529349999997), eventDescription: "Come read for airbnb engineers", imageUrl: nil, maxAttendees: 20, tags: ["fun", "reading"]) {
+//    Event.createEvent(name: "Reading for Airbnbers", datetime: "1508382695", latLong: (37.7721234, -122.40529349999997), eventDescription: "Come read for airbnb engineers", imageUrl: nil, maxAttendees: 20, tags: ["fun", "reading"]) {
 //        (event: Event) in
 //        event.printHumanReadableTestString()
 //    }
