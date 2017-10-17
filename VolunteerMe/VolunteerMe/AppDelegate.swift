@@ -73,23 +73,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Should preload all the tags at the load of the app
     Tag.findTagsByNameArray(["fun", "full day", "reading", "arts"]) {
         (tags: [Tag]) in
-        
+
         print("==========================")
-        print("all the loaded tags")
+        print("find tags by string")
         print("==========================")
-        for tag in Tag.findTagsByNameArraySync(["fun", "full day", "reading", "arts"]) {
+        for tag in tags {
             tag.printHumanReadableTestString()
         }
-
-        // find tags by search term
-        print("==========================")
-        print("find tags with search term")
-        print("==========================")
-        let matchingTags = Tag.queryTagsFromCache("full")
-        for tag in matchingTags {
-            tag.printHumanReadableTestString()
-        }
-
     }
+
+    Event.queryTagsThenEvents(radiusInMiles: 10, targetLocation: (37.7721234, -122.40529349999997), searchString: nil, tags: ["fun"], limit: nil) {
+        (events: [Event]) in
+        print("==========================")
+        print("query events")
+        print("==========================")
+        for event in events {
+            event.printHumanReadableTestString()
+            event.getTags() {
+                (tags: [Tag]) in
+                print(tags)
+            }
+        }
+    }
+
+//    Event.createEvent(name: "Reading for Airbnbers", datetime: "1508382695", latLong: (37.7721234, -122.40529349999997), eventDescription: "Come read for airbnb engineers", imageUrl: nil, maxAttendees: 20, tags: ["fun", "reading"]) {
+//        (event: Event) in
+//        event.printHumanReadableTestString()
+//    }
   }
 }

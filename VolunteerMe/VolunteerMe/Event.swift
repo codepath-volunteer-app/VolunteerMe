@@ -52,48 +52,52 @@ class Event:PFObject, PFSubclassing {
     }
 
     class func createEvent(name: String, datetime: String, latLong: (Double, Double), eventDescription: String?, imageUrl: String?, maxAttendees: Int?, tags: [String]?, successCallback: @escaping (Event) -> ()) -> (){
-        let event = Event()
-        event.name = name
-        event.datetime = datetime
-        let (lat, long) = latLong
-        event.location = PFGeoPoint(latitude: lat, longitude: long)
-
-        if let eventDescription = eventDescription {
-            event.eventDescription = eventDescription
-        }
-
-        if let imageUrl = imageUrl {
-            event.imageUrl = imageUrl
-        }
-
-        if let maxAttendees = maxAttendees {
-            event.maxAttendees = maxAttendees
-        } else {
-            event.maxAttendees = Event.DEFAULT_MAX_ATTENDEES
-        }
 
         if let tags = tags {
-            let foundTags = Tag.findTagsByNameArraySync(tags)
-            let relation = event.relation(forKey: "tags")
-            for tag in foundTags {
-                relation.add(tag)
-            }
-        }
-
-        event.saveInBackground { (success: Bool, error: Error?) in
-            if success {
-                successCallback(event)
-            } else if error != nil {
-                print(error?.localizedDescription)
+            Tag.findTagsByNameArray(tags) {
+                (tags: [Tag]) in
+                
+                let event = Event()
+                event.name = name
+                event.datetime = datetime
+                let (lat, long) = latLong
+                event.location = PFGeoPoint(latitude: lat, longitude: long)
+                
+                if let eventDescription = eventDescription {
+                    event.eventDescription = eventDescription
+                }
+                
+                if let imageUrl = imageUrl {
+                    event.imageUrl = imageUrl
+                }
+                
+                if let maxAttendees = maxAttendees {
+                    event.maxAttendees = maxAttendees
+                } else {
+                    event.maxAttendees = Event.DEFAULT_MAX_ATTENDEES
+                }
+                
+                let relation = event.relation(forKey: "tags")
+                for tag in tags {
+                    relation.add(tag)
+                }
+                
+                event.saveInBackground { (success: Bool, error: Error?) in
+                    if success {
+                        successCallback(event)
+                    } else if error != nil {
+                        print(error?.localizedDescription)
+                    }
+                }
             }
         }
     }
 
     // Uses current location to find events
-    class func queryNearbyEvents(radiusInMiles: Double, searchString: String?, tags: [Tag]?, limit: Int?, successCallback: @escaping ([Event]) -> ()) -> () {
+    class func queryNearbyEvents(radiusInMiles: Double, searchString: String?, tags: [String]?, limit: Int?, successCallback: @escaping ([Event]) -> ()) -> () {
         PFGeoPoint.geoPointForCurrentLocation { (geoPoint: PFGeoPoint?, error: Error?) in
             if let geoPoint = geoPoint {
-                Event.queryEvents(radiusInMiles: radiusInMiles, targetLocation: (geoPoint.latitude, geoPoint.longitude), searchString: searchString, tags: tags, limit: limit, successCallback: successCallback)
+                Event.queryTagsThenEvents(radiusInMiles: radiusInMiles, targetLocation: (geoPoint.latitude, geoPoint.longitude), searchString: searchString, tags: tags, limit: limit, successCallback: successCallback)
             } else if error != nil {
                 print(error?.localizedDescription)
             }
@@ -105,11 +109,12 @@ class Event:PFObject, PFSubclassing {
         let geoPoint = PFGeoPoint(latitude: lat, longitude: long)
         let query = PFQuery(className: "Event")
         query.whereKey("location", nearGeoPoint: geoPoint, withinMiles: radiusInMiles)
-
+        
         if let tags = tags {
+            query.includeKey("tags")
             query.whereKey("tags", containsAllObjectsIn: tags)
         }
-
+        
         if let searchString = searchString {
             query.whereKey("name", hasPrefix: searchString)
         }
@@ -119,7 +124,7 @@ class Event:PFObject, PFSubclassing {
         } else {
             query.limit = Event.DEFAULT_NUMBER_OF_ITEMS_TO_SEARCH
         }
-
+        
         query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
             if let results = results {
                 let events = results as! [Event]
@@ -132,6 +137,17 @@ class Event:PFObject, PFSubclassing {
     
     class func parseClassName() -> String {
         return "Event"
+    }
+
+     class func queryTagsThenEvents(radiusInMiles: Double, targetLocation: (Double, Double), searchString: String?, tags: [String]?, limit: Int?, successCallback: @escaping ([Event]) -> ()) -> () {
+        if let tags = tags {
+            Tag.findTagsByNameArray(tags) {
+                (tags: [Tag]) in
+                Event.queryEvents(radiusInMiles: radiusInMiles, targetLocation: targetLocation, searchString: searchString, tags: tags, limit: limit, successCallback: successCallback)
+            }
+        } else {
+            Event.queryEvents(radiusInMiles: radiusInMiles, targetLocation: targetLocation, searchString: searchString, tags: nil, limit: limit, successCallback: successCallback)
+        }
     }
 
     func getRemainingSpots() -> Int {
@@ -155,17 +171,11 @@ class Event:PFObject, PFSubclassing {
     }
 
     func printHumanReadableTestString() -> () {
+        
         print("event name: \(name)")
         print("event description: \(eventDescription)")
         print("event time: \(humanReadableDateString)")
         print("event location: lat: \(location!.latitude), long: \(location!.longitude)")
         print("event remaining spots: \(getRemainingSpots())")
-        getTags() {
-            (tags: [Tag]) in
-            print("The tags for this event are the following")
-            for tag in tags {
-                tag.printHumanReadableTestString()
-            }
-        }
     }
 }
