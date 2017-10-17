@@ -118,4 +118,12 @@ class User: PFUser {
     func isUserRegisteredForEvent(event: Event, successCallback: @escaping (Bool) -> ()) -> () {
         return EventAttendee.isUserRegisteredForEvent(user: self, event: event, successCallback: successCallback)
     }
+
+    func isOrganization() -> Bool {
+        return userType == .Organization
+    }
+
+    func isVolunteer() -> Bool {
+        return userType == .Volunteer
+    }
 }

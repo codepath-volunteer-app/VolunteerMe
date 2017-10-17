@@ -8,6 +8,7 @@
 
 import Foundation
 import Parse
+import DateToolsSwift
 
 class Event:PFObject, PFSubclassing {
     static let DEFAULT_MAX_ATTENDEES = 100
@@ -21,6 +22,17 @@ class Event:PFObject, PFSubclassing {
 
     // unix timestamp representing datetime of event
     @NSManaged var datetime: String?
+    var humanReadableDateString: String? {
+        get {
+            if let datetime = datetime {
+                let date = Date(timeIntervalSince1970: Double(datetime)!)
+                
+                return date.format(with: .long)
+            }
+            
+            return nil
+        }
+    }
     var maxAttendees: Int = Event.DEFAULT_MAX_ATTENDEES
     var tags: [Tag] {
         get {
@@ -126,7 +138,34 @@ class Event:PFObject, PFSubclassing {
         return Event.DEFAULT_MAX_ATTENDEES - attendees.count
     }
 
+    func getTags(successCallback: @escaping ([Tag]) -> ()) -> () {
+        relation(forKey: "tags").query().findObjectsInBackground() {
+            (results: [PFObject]?, error: Error?) in
+            if let results = results {
+                let tags = results as! [Tag]
+                successCallback(tags)
+            } else if error != nil {
+                print(error?.localizedDescription)
+            }
+        }
+    }
+
     func isUserRegisteredForEvent(user: User, successCallback: @escaping (Bool) -> ()) -> () {
         return EventAttendee.isUserRegisteredForEvent(user: user, event: self, successCallback: successCallback)
+    }
+
+    func printHumanReadableTestString() -> () {
+        print("event name: \(name)")
+        print("event description: \(eventDescription)")
+        print("event time: \(humanReadableDateString)")
+        print("event location: lat: \(location!.latitude), long: \(location!.longitude)")
+        print("event remaining spots: \(getRemainingSpots())")
+        getTags() {
+            (tags: [Tag]) in
+            print("The tags for this event are the following")
+            for tag in tags {
+                tag.printHumanReadableTestString()
+            }
+        }
     }
 }

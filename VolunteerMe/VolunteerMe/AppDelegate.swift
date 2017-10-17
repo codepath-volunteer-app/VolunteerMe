@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Override point for customization after application launch.
     initializeParse()
     customAppearance()
+    testApiCalls()
 
     return true
   }
@@ -58,11 +59,37 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   // Change app color here
-  func customAppearance(){
+  fileprivate func customAppearance(){
 
     let navigationBarAppearace = UINavigationBar.appearance()
     navigationBarAppearace.barTintColor = UIColor("#0084b4")
     navigationBarAppearace.tintColor = UIColor("#ffffff")
     navigationBarAppearace.titleTextAttributes = [NSForegroundColorAttributeName : UIColor("#ffffff")]
+  }
+
+  fileprivate func testApiCalls() {
+    print(User.current())
+
+    // Should preload all the tags at the load of the app
+    Tag.findTagsByNameArray(["fun", "full day", "reading", "arts"]) {
+        (tags: [Tag]) in
+        
+        print("==========================")
+        print("all the loaded tags")
+        print("==========================")
+        for tag in Tag.findTagsByNameArraySync(["fun", "full day", "reading", "arts"]) {
+            tag.printHumanReadableTestString()
+        }
+
+        // find tags by search term
+        print("==========================")
+        print("find tags with search term")
+        print("==========================")
+        let matchingTags = Tag.queryTagsFromCache("full")
+        for tag in matchingTags {
+            tag.printHumanReadableTestString()
+        }
+
+    }
   }
 }
