@@ -102,4 +102,21 @@ class EventAttendee: PFObject, PFSubclassing {
 
         return users
     }
+
+    class func isUserRegisteredForEvent(user: User, event: Event, successCallback: @escaping (Bool) -> () ) -> () {
+        let query = PFQuery(className: "EventAttendee")
+        query.whereKey("event", equalTo: event)
+        query.whereKey("user", equalTo: user)
+
+        query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
+            if let results = results {
+                let eventAttendees = results as! [EventAttendee]
+                
+                successCallback(eventAttendees.count == 1)
+            } else if error != nil {
+                print(error?.localizedDescription)
+            }
+        }
+        
+    }
 }

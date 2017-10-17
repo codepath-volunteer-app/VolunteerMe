@@ -125,4 +125,8 @@ class Event:PFObject, PFSubclassing {
     func getRemainingSpots() -> Int {
         return Event.DEFAULT_MAX_ATTENDEES - attendees.count
     }
+
+    func isUserRegisteredForEvent(user: User, successCallback: @escaping (Bool) -> ()) -> () {
+        return EventAttendee.isUserRegisteredForEvent(user: user, event: self, successCallback: successCallback)
+    }
 }
