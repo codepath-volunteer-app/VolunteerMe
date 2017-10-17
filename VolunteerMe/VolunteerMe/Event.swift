@@ -22,6 +22,7 @@ class Event:PFObject, PFSubclassing {
     @NSManaged var tags: [Tag]?
     // unix timestamp representing datetime of event
     @NSManaged var datetime: String?
+    @NSManaged var maxAttendees: NSNumber?
 
     var humanReadableDateString: String? {
         get {
@@ -34,12 +35,7 @@ class Event:PFObject, PFSubclassing {
             return nil
         }
     }
-    var maxAttendees: Int = Event.DEFAULT_MAX_ATTENDEES
-    var attendees: [User] {
-        get {
-            return EventAttendee.getUsersForEventSync(self)
-        }
-    }
+    var attendees: [User] = []
 
     fileprivate class func _queryEvents(radiusInMiles: Double, targetLocation: (Double, Double), searchString: String?, tags: [Tag]?, limit: Int?, successCallback: @escaping ([Event]) -> ()) -> () {
         let (lat, long) = targetLocation
@@ -94,9 +90,9 @@ class Event:PFObject, PFSubclassing {
         }
         
         if let maxAttendees = maxAttendees {
-            event.maxAttendees = maxAttendees
+            event.maxAttendees = NSNumber(value: maxAttendees)
         } else {
-            event.maxAttendees = Event.DEFAULT_MAX_ATTENDEES
+            event.maxAttendees = NSNumber(value: Event.DEFAULT_MAX_ATTENDEES)
         }
         
         event.saveInBackground { (success: Bool, error: Error?) in
@@ -146,10 +142,6 @@ class Event:PFObject, PFSubclassing {
         return "Event"
     }
 
-    func getRemainingSpots() -> Int {
-        return Event.DEFAULT_MAX_ATTENDEES - attendees.count
-    }
-
     func getTags(successCallback: @escaping ([Tag]) -> ()) -> () {
         PFQuery(className: "Event").includeKey("tags").whereKey("objectId", equalTo: objectId!).findObjectsInBackground() {
             (results: [PFObject]?, error: Error?) in
@@ -161,6 +153,26 @@ class Event:PFObject, PFSubclassing {
             } else if error != nil {
                 print(error?.localizedDescription)
             }
+        }
+    }
+
+    func getRemainingSpots() -> Int {
+        if let maxAttendees = maxAttendees {
+            return Int(maxAttendees) - attendees.count
+        } else {
+            return Event.DEFAULT_MAX_ATTENDEES - attendees.count
+        }
+    }
+
+    func registerUser(user: User, successCallback: @escaping (Bool) -> ()) -> () {
+        EventAttendee.createNewEventAttendee(user: user, event: self, successCallback: successCallback)
+    }
+
+    func fetchAttendees(successCallback: @escaping ([User]) -> ()) {
+        EventAttendee.getUsersForEvent(event: self) {
+            (users: [User]) in
+            self.attendees = users
+            successCallback(users)
         }
     }
 

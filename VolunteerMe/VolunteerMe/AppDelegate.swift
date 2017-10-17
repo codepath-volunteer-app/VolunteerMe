@@ -116,6 +116,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 print("==========================")
                 print(tags)
             }
+            
+            event.fetchAttendees() {
+                (users: [User]) in
+                print("==========================")
+                print("all users registered for event")
+                print("==========================")
+                
+                for user in users {
+                    user.printHumanReadableTestString()
+                }
+            }
+
+//            event.registerUser(user: User.current()!) {
+//                (success: Bool) in
+//                print("==========================")
+//                print("registered current user for event")
+//                print("==========================")
+//            }
         }
     }
     

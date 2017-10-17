@@ -19,19 +19,27 @@ class EventAttendee: PFObject, PFSubclassing {
     }
 
     // TODO: account for max attendees
-    class func createNewEventAttendee(user: User, event: Event) -> EventAttendee {
+    class func createNewEventAttendee(user: User, event: Event, successCallback: @escaping (Bool) -> ()) -> EventAttendee {
         let newEventAttendee = EventAttendee()
-        
+
         newEventAttendee.setObject(event, forKey: "event")
         newEventAttendee.setObject(user, forKey: "user")
         newEventAttendee.setObject(NSDate(), forKey: "date")
-        newEventAttendee.saveInBackground()
+        newEventAttendee.saveInBackground() {
+            (success: Bool, error: Error?) in
+            if success {
+                successCallback(success)
+            } else if error != nil {
+                print(error?.localizedDescription)
+            }
+        }
         
         return newEventAttendee
     }
 
     class func getEventsForUser(user: User, successCallback: @escaping ([Event]) -> ()) -> () {
         let query = PFQuery(className: "EventAttendee")
+        query.includeKey("event")
         query.whereKey("user", equalTo: user)
         var eventAttendees: [EventAttendee] = []
 
@@ -57,6 +65,7 @@ class EventAttendee: PFObject, PFSubclassing {
 
     class func getUsersForEvent(event: Event, successCallback: @escaping ([User]) -> ()) -> () {
         let query = PFQuery(className: "EventAttendee")
+        query.includeKey("user")
         query.whereKey("event", equalTo: event)
         var eventAttendees: [EventAttendee] = []
         

@@ -9,16 +9,20 @@
 import Foundation
 import Parse
 
-enum UserType {
-    case Organization
-    case Volunteer
+enum UserType: String {
+    case Organization = "0"
+    case Volunteer = "1"
 }
 
 class User: PFUser {
+    static let userTypeToStringMap: [UserType:String] = [
+        UserType.Organization: "0",
+        UserType.Volunteer: "1",
+    ]
     @NSManaged var name: String?
     @NSManaged var userDescription: String?
     @NSManaged var profilePictureUrl: String?
-    var userType: UserType = .Volunteer
+    @NSManaged var userType: String?
     var interests: [Tag] {
         get {
             do {
@@ -45,7 +49,9 @@ class User: PFUser {
         }
         
         if let userType = userType {
-            user.userType = userType
+            user.userType = userType.rawValue
+        } else {
+            user.userType = UserType.Volunteer.rawValue
         }
         
         if let profilePictureUrl = profilePictureUrl {
@@ -90,7 +96,7 @@ class User: PFUser {
         }
 
         if let userType = userType {
-            self.userType = userType
+            self.userType = userType.rawValue
         }
 
         if let profilePictureUrl = profilePictureUrl {
@@ -120,10 +126,15 @@ class User: PFUser {
     }
 
     func isOrganization() -> Bool {
-        return userType == .Organization
+        return userType == UserType.Organization.rawValue
     }
 
     func isVolunteer() -> Bool {
-        return userType == .Volunteer
+        return userType == UserType.Volunteer.rawValue
+    }
+
+    func printHumanReadableTestString() -> (){
+        print("username: \(username)")
+        print("userDescription: \(userDescription)")
     }
 }
