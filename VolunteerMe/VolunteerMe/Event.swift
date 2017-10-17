@@ -19,6 +19,7 @@ class Event:PFObject, PFSubclassing {
     @NSManaged var eventDescription: String?
     @NSManaged var imageUrl: String?
     @NSManaged var location: PFGeoPoint?
+    @NSManaged var tags: [Tag]?
 
     // unix timestamp representing datetime of event
     @NSManaged var datetime: String?
@@ -34,62 +35,54 @@ class Event:PFObject, PFSubclassing {
         }
     }
     var maxAttendees: Int = Event.DEFAULT_MAX_ATTENDEES
-    var tags: [Tag] {
-        get {
-            do {
-                let tags = try self.relation(forKey: "tags").query().findObjects()
-                
-                return tags as! [Tag]
-            } catch {
-                return []
-            }
-        }
-    }
     var attendees: [User] {
         get {
             return EventAttendee.getUsersForEventSync(self)
         }
     }
 
-    class func createEvent(name: String, datetime: String, latLong: (Double, Double), eventDescription: String?, imageUrl: String?, maxAttendees: Int?, tags: [String]?, successCallback: @escaping (Event) -> ()) -> (){
+    class func createEvent(name: String, datetime: String, latLong: (Double, Double), eventDescription: String?, imageUrl: String?, maxAttendees: Int?, tags: [Tag]?, successCallback: @escaping (Event) -> ()) -> (){
+        let event = Event()
+        event.name = name
+        event.datetime = datetime
+        let (lat, long) = latLong
+        event.location = PFGeoPoint(latitude: lat, longitude: long)
+        
+        if let eventDescription = eventDescription {
+            event.eventDescription = eventDescription
+        }
+        
+        if let imageUrl = imageUrl {
+            event.imageUrl = imageUrl
+        }
+    
+        if let tags = tags {
+            event.tags = tags
+        }
+        
+        if let maxAttendees = maxAttendees {
+            event.maxAttendees = maxAttendees
+        } else {
+            event.maxAttendees = Event.DEFAULT_MAX_ATTENDEES
+        }
+        
+        event.saveInBackground { (success: Bool, error: Error?) in
+            if success {
+                successCallback(event)
+            } else if error != nil {
+                print(error?.localizedDescription)
+            }
+        }
+    }
 
+    class func fetchTagsAndCreateEvent(name: String, datetime: String, latLong: (Double, Double), eventDescription: String?, imageUrl: String?, maxAttendees: Int?, tags: [String]?, successCallback: @escaping (Event) -> ()) -> (){
         if let tags = tags {
             Tag.findTagsByNameArray(tags) {
                 (tags: [Tag]) in
-                
-                let event = Event()
-                event.name = name
-                event.datetime = datetime
-                let (lat, long) = latLong
-                event.location = PFGeoPoint(latitude: lat, longitude: long)
-                
-                if let eventDescription = eventDescription {
-                    event.eventDescription = eventDescription
-                }
-                
-                if let imageUrl = imageUrl {
-                    event.imageUrl = imageUrl
-                }
-                
-                if let maxAttendees = maxAttendees {
-                    event.maxAttendees = maxAttendees
-                } else {
-                    event.maxAttendees = Event.DEFAULT_MAX_ATTENDEES
-                }
-                
-                let relation = event.relation(forKey: "tags")
-                for tag in tags {
-                    relation.add(tag)
-                }
-                
-                event.saveInBackground { (success: Bool, error: Error?) in
-                    if success {
-                        successCallback(event)
-                    } else if error != nil {
-                        print(error?.localizedDescription)
-                    }
-                }
+                Event.createEvent(name: name, datetime: datetime, latLong: latLong, eventDescription: eventDescription, imageUrl: imageUrl, maxAttendees: maxAttendees, tags: tags, successCallback: successCallback)
             }
+        } else {
+            Event.createEvent(name: name, datetime: datetime, latLong: latLong, eventDescription: eventDescription, imageUrl: imageUrl, maxAttendees: maxAttendees, tags: nil, successCallback: successCallback)
         }
     }
 
@@ -97,7 +90,7 @@ class Event:PFObject, PFSubclassing {
     class func queryNearbyEvents(radiusInMiles: Double, searchString: String?, tags: [String]?, limit: Int?, successCallback: @escaping ([Event]) -> ()) -> () {
         PFGeoPoint.geoPointForCurrentLocation { (geoPoint: PFGeoPoint?, error: Error?) in
             if let geoPoint = geoPoint {
-                Event.queryTagsThenEvents(radiusInMiles: radiusInMiles, targetLocation: (geoPoint.latitude, geoPoint.longitude), searchString: searchString, tags: tags, limit: limit, successCallback: successCallback)
+                Event.fetchTagsAndFindEvents(radiusInMiles: radiusInMiles, targetLocation: (geoPoint.latitude, geoPoint.longitude), searchString: searchString, tags: tags, limit: limit, successCallback: successCallback)
             } else if error != nil {
                 print(error?.localizedDescription)
             }
@@ -111,8 +104,10 @@ class Event:PFObject, PFSubclassing {
         query.whereKey("location", nearGeoPoint: geoPoint, withinMiles: radiusInMiles)
         
         if let tags = tags {
-            query.includeKey("tags")
-            query.whereKey("tags", containsAllObjectsIn: tags)
+            if tags.count > 0 {
+                query.includeKey("tags")
+                query.whereKey("tags", containsAllObjectsIn: tags)
+            }
         }
         
         if let searchString = searchString {
@@ -139,7 +134,7 @@ class Event:PFObject, PFSubclassing {
         return "Event"
     }
 
-     class func queryTagsThenEvents(radiusInMiles: Double, targetLocation: (Double, Double), searchString: String?, tags: [String]?, limit: Int?, successCallback: @escaping ([Event]) -> ()) -> () {
+     class func fetchTagsAndFindEvents(radiusInMiles: Double, targetLocation: (Double, Double), searchString: String?, tags: [String]?, limit: Int?, successCallback: @escaping ([Event]) -> ()) -> () {
         if let tags = tags {
             Tag.findTagsByNameArray(tags) {
                 (tags: [Tag]) in
@@ -155,11 +150,13 @@ class Event:PFObject, PFSubclassing {
     }
 
     func getTags(successCallback: @escaping ([Tag]) -> ()) -> () {
-        relation(forKey: "tags").query().findObjectsInBackground() {
+        PFQuery(className: "Event").includeKey("tags").whereKey("objectId", equalTo: objectId!).findObjectsInBackground() {
             (results: [PFObject]?, error: Error?) in
             if let results = results {
-                let tags = results as! [Tag]
-                successCallback(tags)
+                if results.count > 0 {
+                    let event = results[0] as! Event
+                    successCallback(event.tags ?? [])
+                }
             } else if error != nil {
                 print(error?.localizedDescription)
             }
@@ -176,6 +173,5 @@ class Event:PFObject, PFSubclassing {
         print("event description: \(eventDescription)")
         print("event time: \(humanReadableDateString)")
         print("event location: lat: \(location!.latitude), long: \(location!.longitude)")
-        print("event remaining spots: \(getRemainingSpots())")
     }
 }

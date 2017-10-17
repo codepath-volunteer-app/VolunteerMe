@@ -68,8 +68,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   fileprivate func testApiCalls() {
+    print("==========================")
+    print("current user")
+    print("==========================")
     print(User.current())
-
+    
     // Should preload all the tags at the load of the app
     Tag.findTagsByNameArray(["fun", "full day", "reading", "arts"]) {
         (tags: [Tag]) in
@@ -82,10 +85,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-    Event.queryTagsThenEvents(radiusInMiles: 10, targetLocation: (37.7721234, -122.40529349999997), searchString: nil, tags: ["fun"], limit: nil) {
+    Event.fetchTagsAndFindEvents(radiusInMiles: 10, targetLocation: (37.7721234, -122.40529349999997), searchString: nil, tags: ["reading", "fun"], limit: nil) {
         (events: [Event]) in
         print("==========================")
-        print("query events")
+        print("query events that can be found")
+        print("==========================")
+        for event in events {
+            event.printHumanReadableTestString()
+            event.getTags() {
+                (tags: [Tag]) in
+                print("==========================")
+                print("tags for found event")
+                print("==========================")
+                print(tags)
+            }
+        }
+    }
+    
+    Event.fetchTagsAndFindEvents(radiusInMiles: 10, targetLocation: (37.7721234, -122.40529349999997), searchString: nil, tags: ["full day"], limit: nil) {
+        (events: [Event]) in
+        print("==========================")
+        print("query events that can not be found")
         print("==========================")
         for event in events {
             event.printHumanReadableTestString()
@@ -96,7 +116,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
 
-//    Event.createEvent(name: "Reading for Airbnbers", datetime: "1508382695", latLong: (37.7721234, -122.40529349999997), eventDescription: "Come read for airbnb engineers", imageUrl: nil, maxAttendees: 20, tags: ["fun", "reading"]) {
+//    Event.fetchTagsAndCreateEvent(name: "Reading for Airbnbers", datetime: "1508382695", latLong: (37.7721234, -122.40529349999997), eventDescription: "Come read for airbnb engineers", imageUrl: nil, maxAttendees: 20, tags: ["fun", "reading"]) {
 //        (event: Event) in
 //        event.printHumanReadableTestString()
 //    }
