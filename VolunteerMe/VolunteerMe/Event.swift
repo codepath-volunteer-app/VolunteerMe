@@ -137,6 +137,17 @@ class Event:PFObject, PFSubclassing {
         }
     }
 
+    func isInPast() -> Bool {
+        let date: Date = Date(timeIntervalSince1970: Double(datetime!)!)
+    
+        return date.isEarlier(than: .init(timeIntervalSinceNow: 0))
+    }
+
+    func isInFuture() -> Bool {
+        let date: Date = Date(timeIntervalSince1970: Double(datetime!)!)
+        
+        return date.isLater(than: .init(timeIntervalSinceNow: 0))
+    }
     
     class func parseClassName() -> String {
         return "Event"

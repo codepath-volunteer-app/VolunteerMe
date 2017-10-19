@@ -68,10 +68,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   }
 
   fileprivate func testApiCalls() {
-    print("==========================")
-    print("current user")
-    print("==========================")
-    print(User.current())
+//    User.createNewUser(username: "teaflavored", password: "teaflavored", name: "Auster", userDescription: "Just a boring engineer", userType: UserType.Volunteer, profilePictureUrl: nil, tags: ["fun", "full day"]) {
+//        (user: User) in
+//        print("==========================")
+//        print("user creation")
+//        print("==========================")
+//        user.printHumanReadableTestString()
+//    }
+    
+    User.login(username: "teaflavored", password: "teaflavored") {
+        (user: User) in
+        print("==========================")
+        print("current user")
+        print("==========================")
+        print(User.current())
+    }
     
     // Should preload all the tags at the load of the app
     Tag.getTagsByNameArray(["fun", "full day", "reading", "arts"]) {

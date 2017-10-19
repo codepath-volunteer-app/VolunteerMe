@@ -14,6 +14,12 @@ enum UserType: String {
     case Volunteer = "1"
 }
 
+enum UserEventType {
+    case All
+    case Past
+    case Upcoming
+}
+
 class User: PFUser {
     static let userTypeToStringMap: [UserType:String] = [
         UserType.Organization: "0",
@@ -23,23 +29,17 @@ class User: PFUser {
     @NSManaged var userDescription: String?
     @NSManaged var profilePictureUrl: String?
     @NSManaged var userType: String?
-    var interests: [Tag] {
-        get {
-            do {
-                let tags = try self.relation(forKey: "interests").query().findObjects()
-                
-                return tags as! [Tag]
-            } catch {
-                return []
-            }
-        }
-    }
+    @NSManaged var interests: [Tag]?
 
-    class func createNewUser(username:String, password: String, name: String?, userDescription: String?, userType: UserType?, profilePictureUrl: String?, tags: [String]?, successCallback: @escaping (User) -> ()) -> () {
+    fileprivate class func _createNewUser(username:String, password: String, name: String?, userDescription: String?, userType: UserType?, profilePictureUrl: String?, tags: [Tag]?, successCallback: @escaping (User) -> ()) {
         let user = User()
         user.username = username
         user.password = password
 
+        if let tags = tags {
+            user.interests = tags
+        }
+        
         if let name = name {
             user.name = name
         }
@@ -57,14 +57,6 @@ class User: PFUser {
         if let profilePictureUrl = profilePictureUrl {
             user.profilePictureUrl = profilePictureUrl
         }
-
-        if let tags = tags {
-            let foundTags = Tag.getTagsByNameArraySync(tags)
-            let relation = user.relation(forKey: "interests")
-            for tag in foundTags {
-                relation.add(tag)
-            }
-        }
         
         user.signUpInBackground() {
             (success: Bool, error: Error?) in
@@ -73,6 +65,17 @@ class User: PFUser {
             } else if error != nil {
                 print(error?.localizedDescription)
             }
+        }
+    }
+
+    class func createNewUser(username:String, password: String, name: String?, userDescription: String?, userType: UserType?, profilePictureUrl: String?, tags: [String]?, successCallback: @escaping (User) -> ()) -> () {
+        if let tags = tags {
+            Tag.getTagsByNameArray(tags) {
+                (tags: [Tag]) in
+                User._createNewUser(username: username, password: password, name: name, userDescription: userDescription, userType: userType, profilePictureUrl: profilePictureUrl, tags: tags, successCallback: successCallback)
+            }
+        } else {
+            User._createNewUser(username: username, password: password, name: name, userDescription: userDescription, userType: userType, profilePictureUrl: profilePictureUrl, tags: nil, successCallback: successCallback)
         }
     }
     
@@ -117,6 +120,23 @@ class User: PFUser {
                 successCallback(self)
             } else if error != nil {
                 print(error?.localizedDescription)
+            }
+        }
+    }
+
+    func getParticipatingEvents(userEventType: UserEventType, successCallback: @escaping ([Event]) -> ()) -> () {
+        EventAttendee.getEventsForUser(user: self) {
+            (events: [Event]) in
+            if userEventType == .All {
+                successCallback(events)
+            } else if userEventType == .Past {
+                events.filter({ (event: Event) -> Bool in
+                    return event.isInPast()
+                })
+            } else if userEventType == .Upcoming {
+                events.filter({ (event: Event) -> Bool in
+                    return event.isInFuture()
+                })
             }
         }
     }
