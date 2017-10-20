@@ -196,6 +196,7 @@ class Event:PFObject, PFSubclassing {
         print("event name: \(name)")
         print("event description: \(eventDescription)")
         print("event time: \(humanReadableDateString)")
+        print("event url: \(imageUrl)")
         print("event location: lat: \(location!.latitude), long: \(location!.longitude)")
     }
 }

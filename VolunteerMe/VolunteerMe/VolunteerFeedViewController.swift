@@ -12,6 +12,7 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var tableView: UITableView!
     
     let searchController = UISearchController(searchResultsController: nil)
+    var events: [Event]?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,7 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
         configSearchBarAboveTable()
 
         // Do any additional setup after loading the view.
+        getEvents()
     }
 
     override func didReceiveMemoryWarning() {
@@ -36,14 +38,13 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
     
     // MARK: - Table View Delegate
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 2
+        return events?.count ?? 0
+        
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell") as! FeedCell
-        //cell.colorLabel.text = data[indexPath.row]
-        cell.feedDescriptionLabel.text = "This is the best charity to work for. Don't waste your saturday on cleaning alone. Make it more productive, give a sandwich. "
-        cell.tagsLabel.text = "Tags: Help, #forever, #Sandwich, #Carrots, #HELP, #Saturday"
+        cell.event = (events?[indexPath.row])!
         return cell
     }
     
@@ -118,5 +119,17 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
     public func didDismissSearchController(_ searchController: UISearchController) {
         // When cancelled show the previous data set
         print("done from the controller")
+    }
+    
+    // MARK: - Network call
+    func getEvents(){
+        Event.getNearbyEvents(radiusInMiles: 10000, searchString: nil, tags: nil, limit: 20) { (eventsReturned: [Event]) in
+            print("I am in here")
+            self.events = eventsReturned
+            for event in self.events! {
+                event.printHumanReadableTestString()
+            }
+            self.tableView.reloadData()
+        }
     }
 }

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AFNetworking
 
 class FeedCell: UITableViewCell {
     @IBOutlet weak var profileImage: UIImageView!
@@ -16,6 +17,27 @@ class FeedCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var eventTimeLabel: UILabel!
     @IBOutlet weak var feedDescriptionLabel: UILabel!
+    
+    var event: Event! {
+        didSet{
+            feedDescriptionLabel.text = event.eventDescription
+            dateLabel.text = event.humanReadableDateString
+            feedTitleLabel.text = event.name
+            
+            if let imageUrlString = event.imageUrl {
+                let imageUrl = URL(string: imageUrlString)
+                profileImage.setImageWith(imageUrl!)
+            }
+            tagsLabel.text = "Tags: "
+//            if let tags = event.tags {
+//                for tag in tags {
+//                    if let tagName = tag.name {
+//                        tagsLabel.text! += "\(tagName)"
+//                    }
+//                }
+//            }
+        }
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
