@@ -124,12 +124,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         print("==========================")
         for event in events {
             event.printHumanReadableTestString()
-            event.getTags() {
-                (tags: [Tag]) in
+            for tag in event.tags! {
                 print("==========================")
-                print("tags for found nearby event")
+                print("tags for event")
                 print("==========================")
-                print(tags)
+                print(tag.name)
             }
         }
     }
