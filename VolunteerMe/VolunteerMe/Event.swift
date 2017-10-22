@@ -51,7 +51,7 @@ class Event:PFObject, PFSubclassing {
         }
         
         if let searchString = searchString {
-            query.whereKey("name", hasPrefix: searchString)
+            query.whereKey("name", hasPrefix: searchString.lowercased())
         }
         
         if let limit = limit {

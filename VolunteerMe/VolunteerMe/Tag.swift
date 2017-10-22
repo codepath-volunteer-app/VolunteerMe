@@ -18,22 +18,31 @@ class Tag: PFObject, PFSubclassing {
     }
 
     class func createNewTag(name: String, successCallback: @escaping (Tag) -> ()) -> () {
-        let tag = Tag()
-        tag.name = name
-
-        tag.saveInBackground { (success, error) in
-            if success {
-                successCallback(tag)
-            } else if error != nil {
-                print(error?.localizedDescription)
+        // Check if tag exists, create if not exists
+        Tag.getTagsByNameArray([name]) { (tags: [Tag]) in
+            if tags.count == 0 {
+                let tag = Tag()
+                tag.name = name.lowercased()
+                
+                tag.saveInBackground { (success, error) in
+                    if success {
+                        successCallback(tag)
+                    } else if error != nil {
+                        print(error?.localizedDescription)
+                    }
+                }
+            } else {
+                print("tag with name \(name) already exists")
             }
         }
     }
 
     class func getTagsByNameArray(_ arrayOfTagNames: [String], successCallback: @escaping ([Tag]) -> ()) -> () {
-    
+        let lowercaseArrayOfTagNames: [String] = arrayOfTagNames.map { (tagName) -> String in
+            return tagName.lowercased()
+        }
         let query = PFQuery(className: "Tag")
-        query.whereKey("name", containedIn: arrayOfTagNames)
+        query.whereKey("name", containedIn: lowercaseArrayOfTagNames)
             
         query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
             if let results = results {
@@ -47,8 +56,11 @@ class Tag: PFObject, PFSubclassing {
 
     // Synchronous version of findTagsByNameArray
     class func getTagsByNameArraySync(_ arrayOfTagNames: [String]) -> [Tag] {
+        let lowercaseArrayOfTagNames: [String] = arrayOfTagNames.map { (tagName) -> String in
+            return tagName.lowercased()
+        }
         let query = PFQuery(className: "Tag")
-        query.whereKey("name", containedIn: arrayOfTagNames)
+        query.whereKey("name", containedIn: lowercaseArrayOfTagNames)
         var tags: [Tag] = []
             
         do {
