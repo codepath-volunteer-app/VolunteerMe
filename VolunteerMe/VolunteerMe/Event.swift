@@ -16,7 +16,9 @@ class Event:PFObject, PFSubclassing {
     fileprivate static let DEFAULT_NUMBER_OF_ITEMS_TO_SEARCH = 20
     
     @NSManaged var name: String?
+    @NSManaged var nameLower: String?
     @NSManaged var eventDescription: String?
+    @NSManaged var eventDescriptionLower: String?
     @NSManaged var imageUrl: String?
     @NSManaged var location: PFGeoPoint?
     @NSManaged var tags: [Tag]?
@@ -51,7 +53,7 @@ class Event:PFObject, PFSubclassing {
         }
         
         if let searchString = searchString {
-            query.whereKey("name", hasPrefix: searchString.lowercased())
+            query.whereKey("nameLower", hasPrefix: searchString.lowercased())
         }
         
         if let limit = limit {
@@ -73,12 +75,14 @@ class Event:PFObject, PFSubclassing {
     fileprivate class func _createEvent(name: String, datetime: String, latLong: (Double, Double), eventDescription: String?, imageUrl: String?, maxAttendees: Int?, tags: [Tag]?, successCallback: @escaping (Event) -> ()) -> (){
         let event = Event()
         event.name = name
+        event.nameLower = name.lowercased()
         event.datetime = datetime
         let (lat, long) = latLong
         event.location = PFGeoPoint(latitude: lat, longitude: long)
         
         if let eventDescription = eventDescription {
             event.eventDescription = eventDescription
+            event.eventDescriptionLower = eventDescription.lowercased()
         }
         
         if let imageUrl = imageUrl {

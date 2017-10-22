@@ -96,7 +96,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     Tag.createNewTag(name: "housing") { _ in
     }
-    
 
     User.login(username: "teaflavored", password: "teaflavored") {
         (user: User) in
