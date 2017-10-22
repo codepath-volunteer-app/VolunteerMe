@@ -43,11 +43,11 @@ class Event:PFObject, PFSubclassing {
         let (lat, long) = targetLocation
         let geoPoint = PFGeoPoint(latitude: lat, longitude: long)
         let query = PFQuery(className: "Event")
+        query.includeKey("tags")
         query.whereKey("location", nearGeoPoint: geoPoint, withinMiles: radiusInMiles)
         
         if let tags = tags {
             if tags.count > 0 {
-                query.includeKey("tags")
                 query.whereKey("tags", containsAllObjectsIn: tags)
             }
         }
