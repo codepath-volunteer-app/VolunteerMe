@@ -58,9 +58,9 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "showEventDetails" {
-            // let cell = sender as! FeedCell
-            // let eventDetailsController = segue.destination as! EventDetailsViewController
-            // eventDetailsController.event = cell.event
+             let cell = sender as! FeedCell
+             let eventDetailsController = segue.destination as! EventDetailsViewController
+             eventDetailsController.event = cell.event
 
         } else if segue.identifier == "filterSeque" {
             // Get the new view controller using segue.destinationViewController.

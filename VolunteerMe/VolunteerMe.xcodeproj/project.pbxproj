@@ -20,6 +20,9 @@
 		DD8D57BA1F87F33700497D5A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD8D57B81F87F33700497D5A /* Main.storyboard */; };
 		DD8D57BC1F87F33700497D5A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DD8D57BB1F87F33700497D5A /* Assets.xcassets */; };
 		DD8D57BF1F87F33700497D5A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DD8D57BD1F87F33700497D5A /* LaunchScreen.storyboard */; };
+		DDABFDDD1F9B182C0077AA2D /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDABFDDC1F9B182C0077AA2D /* ProfileViewController.swift */; };
+		DDABFDE31F9C22EB0077AA2D /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDABFDE21F9C22EB0077AA2D /* EventCell.swift */; };
+		DDABFDE51F9C23050077AA2D /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDABFDE41F9C23050077AA2D /* HeaderCell.swift */; };
 		DDAC521C1F91B0BF007BDB03 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAC521B1F91B0BF007BDB03 /* Color.swift */; };
 		DDAC52221F91B821007BDB03 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAC52211F91B821007BDB03 /* LoginViewController.swift */; };
 		DDAC52241F93375E007BDB03 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DDAC52231F93375E007BDB03 /* CreateAccountViewController.swift */; };
@@ -47,6 +50,9 @@
 		DD8D57BB1F87F33700497D5A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		DD8D57BE1F87F33700497D5A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DD8D57C01F87F33700497D5A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDABFDDC1F9B182C0077AA2D /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		DDABFDE21F9C22EB0077AA2D /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		DDABFDE41F9C23050077AA2D /* HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 		DDAC521B1F91B0BF007BDB03 /* Color.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
 		DDAC52211F91B821007BDB03 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		DDAC52231F93375E007BDB03 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
@@ -84,6 +90,8 @@
 			children = (
 				984234461F903B5700FF05BB /* Filters */,
 				093E39121F93BFA000A797FB /* FeedCell.swift */,
+				DDABFDE21F9C22EB0077AA2D /* EventCell.swift */,
+				DDABFDE41F9C23050077AA2D /* HeaderCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -98,6 +106,7 @@
 				DDAC52271F9337A6007BDB03 /* OrganizationCreateAccountViewController.swift */,
 				DDAC522B1F9340C6007BDB03 /* EventDetailsViewController.swift */,
 				093E39141F93BFC700A797FB /* FilterViewController.swift */,
+				DDABFDDC1F9B182C0077AA2D /* ProfileViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -325,8 +334,11 @@
 				093E39111F92062200A797FB /* EventAttendee.swift in Sources */,
 				DDAC52221F91B821007BDB03 /* LoginViewController.swift in Sources */,
 				DDAC521C1F91B0BF007BDB03 /* Color.swift in Sources */,
+				DDABFDDD1F9B182C0077AA2D /* ProfileViewController.swift in Sources */,
 				984234191F8ECA6600FF05BB /* VolunteerFeedViewController.swift in Sources */,
+				DDABFDE51F9C23050077AA2D /* HeaderCell.swift in Sources */,
 				DDAC522C1F9340C6007BDB03 /* EventDetailsViewController.swift in Sources */,
+				DDABFDE31F9C22EB0077AA2D /* EventCell.swift in Sources */,
 				984234491F903B9100FF05BB /* FilterCell.swift in Sources */,
 				093E39151F93BFC700A797FB /* FilterViewController.swift in Sources */,
 				DDAC522A1F933AC4007BDB03 /* AppDelegate.swift in Sources */,

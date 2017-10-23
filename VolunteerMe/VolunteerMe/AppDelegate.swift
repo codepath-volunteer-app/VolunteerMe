@@ -22,6 +22,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     initializeParse()
     customAppearance()
     testApiCalls()
+    
+    if User.current() != nil {
+        // Go straight to volunteer feed
+    }
 
     return true
   }

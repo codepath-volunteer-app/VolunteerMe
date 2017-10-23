@@ -63,7 +63,7 @@ class User: PFUser {
             if success {
                 successCallback(user)
             } else if error != nil {
-                print(error?.localizedDescription)
+                print(error!.localizedDescription)
             }
         }
     }
@@ -119,7 +119,7 @@ class User: PFUser {
             if success {
                 successCallback(self)
             } else if error != nil {
-                print(error?.localizedDescription)
+                print(error!.localizedDescription)
             }
         }
     }
