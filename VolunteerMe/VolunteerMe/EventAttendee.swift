@@ -18,6 +18,28 @@ class EventAttendee: PFObject, PFSubclassing {
         return "EventAttendee"
     }
 
+    class func deleteEventForUser(user: User, event: Event, successCallback: @escaping(Bool) -> ()) -> () {
+        let query = PFQuery(className: "EventAttendee")
+        query.whereKey("event", equalTo: event)
+        query.whereKey("user", equalTo: user)
+        
+        query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
+            if let results = results {
+                if results.count > 0 {
+                    let eventAttendee = results[0] as! EventAttendee
+                    
+                    eventAttendee.deleteInBackground(block: { (success: Bool, error: Error?) in
+                        if (success) {
+                            successCallback(success)
+                        } else if error != nil {
+                            print(error?.localizedDescription)
+                        }
+                    })
+                }
+            }
+        }
+    }
+
     // TODO: account for max attendees
     class func createNewEventAttendee(user: User, event: Event, successCallback: @escaping (Bool) -> ()) -> EventAttendee {
         let newEventAttendee = EventAttendee()

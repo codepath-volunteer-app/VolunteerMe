@@ -141,6 +141,10 @@ class User: PFUser {
         }
     }
 
+    func unregisterEvent(event: Event, successCallback: @escaping (Bool) -> ()) -> () {
+        EventAttendee.deleteEventForUser(user: self, event: event, successCallback: successCallback)
+    }
+
     func isUserRegisteredForEvent(event: Event, successCallback: @escaping (Bool) -> ()) -> () {
         return EventAttendee.isUserRegisteredForEvent(user: self, event: event, successCallback: successCallback)
     }
