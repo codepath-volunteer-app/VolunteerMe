@@ -46,7 +46,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             } else {
                 var tagText = "Tags:"
                 for tag in tags! {
-                    tagText += " " + tag.name!
+                    if let name = tag.name {
+                        tagText += " " + name
+                    }
                 }
                 profileTags.text = tagText
             }

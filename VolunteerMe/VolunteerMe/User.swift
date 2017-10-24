@@ -84,6 +84,11 @@ class User: PFUser {
             if let error = error {
                 print("User log in failed: \(error.localizedDescription)")
             } else {
+                if let interests = User.current()!.interests {
+                    for interest in interests {
+                        interest.fetchInBackground()
+                    }
+                }
                 successCallback(user as! User)
             }
             }
