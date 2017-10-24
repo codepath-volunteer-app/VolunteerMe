@@ -135,13 +135,15 @@ class User: PFUser {
             if userEventType == .All {
                 successCallback(events)
             } else if userEventType == .Past {
-                events.filter({ (event: Event) -> Bool in
+                let pastEvents = events.filter({ (event: Event) -> Bool in
                     return event.isInPast()
                 })
+                successCallback(pastEvents)
             } else if userEventType == .Upcoming {
-                events.filter({ (event: Event) -> Bool in
+                let upcomingEvents = events.filter({ (event: Event) -> Bool in
                     return event.isInFuture()
                 })
+                successCallback(upcomingEvents)
             }
         }
     }

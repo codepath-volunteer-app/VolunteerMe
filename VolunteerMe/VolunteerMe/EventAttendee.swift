@@ -74,7 +74,9 @@ class EventAttendee: PFObject, PFSubclassing {
                     let event = eventAttendee.object(forKey: "event")
                     
                     if let event = event {
-                        events.append(event as! Event)
+                        let event = event as! Event
+                        event.fetchInBackground()
+                        events.append(event)
                     }
                 }
 

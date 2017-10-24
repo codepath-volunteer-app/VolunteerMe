@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     // Override point for customization after application launch.
     initializeParse()
     customAppearance()
-    testApiCalls()
+//    testApiCalls()
     
     if User.current() != nil {
         // Go straight to volunteer feed

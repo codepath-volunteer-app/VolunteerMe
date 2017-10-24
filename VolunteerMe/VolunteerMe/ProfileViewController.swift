@@ -31,10 +31,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             tags = currentUser!.interests!
             
             currentUser!.getParticipatingEvents(userEventType: .Upcoming) { (upcomingEvents) in
-                self.events[0] = upcomingEvents
+                self.events.append(upcomingEvents)
             }
+
             currentUser!.getParticipatingEvents(userEventType: .Past) { (pastEvents) in
-                self.events[1] = pastEvents
+                self.events.append(pastEvents)
             }
         }
     }
@@ -74,6 +75,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print("rows for section \(section)")
+        print(events[section].count)
         return events[section].count
     }
     
