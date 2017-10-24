@@ -65,21 +65,21 @@ class CreateAccountViewController: UIViewController {
           tag.text = " " + tag.text! + " "
           tag.layer.cornerRadius = 8.0
           tag.clipsToBounds = true
-//          let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tagTapped(_:)))
-//          tag.addGestureRecognizer(tapGesture)
+          tag.isUserInteractionEnabled = true
+          let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tagTapped(gestureRecognizer:)))
+          tag.addGestureRecognizer(tapGesture)
           i += 1
         }
         
         // Do any additional setup after loading the view.
     }
-    
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
     func tagTapped(gestureRecognizer: UITapGestureRecognizer) {
-      print("TAPPED")
       let tag = tagLabels[gestureRecognizer.view!.tag]
       if tag.backgroundColor == Color.PRIMARY_COLOR {
         tag.backgroundColor = Color.SECONDARY_COLOR
