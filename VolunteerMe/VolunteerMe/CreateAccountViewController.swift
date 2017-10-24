@@ -19,10 +19,20 @@ class CreateAccountViewController: UIViewController {
     @IBOutlet weak var createAccountButtonBackground: UIView!
     @IBOutlet weak var createAccountButtonLabel: UILabel!
     @IBOutlet weak var tagsView: UIView!
+
+    @IBOutlet weak var animalsTag: UILabel!
+    @IBOutlet weak var discriminationTag: UILabel!
+    @IBOutlet weak var educationTag: UILabel!
+    @IBOutlet weak var elderlyTag: UILabel!
+    @IBOutlet weak var environmentTag: UILabel!
+    @IBOutlet weak var healthTag: UILabel!
+    @IBOutlet weak var homelessnessTag: UILabel!
+    @IBOutlet weak var hungerTag: UILabel!
+    @IBOutlet weak var youthTag: UILabel!
+
     
     var tagLabels: [UILabel] = [UILabel]()
-    var onSuccess: (() -> ())?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         titleText.textColor = Color.PRIMARY_COLOR
@@ -34,42 +44,51 @@ class CreateAccountViewController: UIViewController {
         createAccountButtonBackground.layer.cornerRadius = 8.0
         createAccountButtonBackground.clipsToBounds = true
         createAccountButtonLabel.textColor = Color.WHITE
-        
+
+        tagLabels = [
+          animalsTag,
+          discriminationTag,
+          educationTag,
+          elderlyTag,
+          environmentTag,
+          healthTag,
+          homelessnessTag,
+          hungerTag,
+          youthTag,
+        ]
+
         var i = 0
-        print(i)
-        for view in tagsView.subviews {
-            if let tag = view as? UILabel {
-                tag.tag = i
-                tag.backgroundColor = Color.PRIMARY_COLOR
-                tag.textColor = Color.WHITE
-                tag.layer.cornerRadius = 8.0
-                tag.clipsToBounds = true
-                let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tagTapped))
-                tag.addGestureRecognizer(tapGesture)
-                i += 1
-                tagLabels.append(tag)
-            }
+        for tag in tagLabels {
+          tag.tag = i
+          tag.backgroundColor = Color.PRIMARY_COLOR
+          tag.textColor = Color.WHITE
+          tag.text = " " + tag.text! + " "
+          tag.layer.cornerRadius = 8.0
+          tag.clipsToBounds = true
+//          let tapGesture = UITapGestureRecognizer(target: self, action: #selector(self.tagTapped(_:)))
+//          tag.addGestureRecognizer(tapGesture)
+          i += 1
         }
         
         // Do any additional setup after loading the view.
-    }
-    
-    func tagTapped(gestureRecognizer: UIGestureRecognizer) {
-        print("TAPPED")
-        let tag = tagLabels[gestureRecognizer.view!.tag]
-        if tag.backgroundColor == Color.PRIMARY_COLOR {
-            tag.backgroundColor = Color.SECONDARY_COLOR
-        } else {
-            tag.backgroundColor = Color.PRIMARY_COLOR
-        }
-        // Mark tag as selected
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
+
+    func tagTapped(gestureRecognizer: UITapGestureRecognizer) {
+      print("TAPPED")
+      let tag = tagLabels[gestureRecognizer.view!.tag]
+      if tag.backgroundColor == Color.PRIMARY_COLOR {
+        tag.backgroundColor = Color.SECONDARY_COLOR
+      } else {
+        tag.backgroundColor = Color.PRIMARY_COLOR
+      }
+      // Mark tag as selected
+    }
+
     @IBAction func cancelButtonTapped(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -83,8 +102,7 @@ class CreateAccountViewController: UIViewController {
             }
         }
         User.createNewUser(username: usernameField.text!, password: passwordField.text!, name: usernameField.text, userDescription: nil, userType: .Volunteer, profilePictureUrl: nil, tags: selectedTags) { (user) in
-            self.onSuccess?()
-//            self.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
         }
         
     }

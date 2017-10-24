@@ -40,6 +40,7 @@ class OrganizationCreateAccountViewController: UIViewController {
     }
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
+      dismiss(animated: true, completion: nil)
     }
     
     @IBAction func createAccountButtonTapped(_ sender: Any) {
