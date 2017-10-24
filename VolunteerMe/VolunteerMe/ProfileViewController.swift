@@ -17,11 +17,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet weak var tableView: UITableView!
     
-    var events: [[Event]] = [[Event]]() {
-        didSet {
-            print(events.count)
-        }
-    }
+    var events: [[Event]] = []
     private let eventCategories = ["Upcoming", "History"]
     var currentUser: User? {
         didSet {
@@ -32,10 +28,12 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             
             currentUser!.getParticipatingEvents(userEventType: .Upcoming) { (upcomingEvents) in
                 self.events.append(upcomingEvents)
+                self.tableView.reloadData()
             }
 
             currentUser!.getParticipatingEvents(userEventType: .Past) { (pastEvents) in
                 self.events.append(pastEvents)
+                self.tableView.reloadData()
             }
         }
     }
