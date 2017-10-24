@@ -538,6 +538,7 @@
                         <outlet property="usernameField" destination="Chm-pK-Fzh" id="yzD-74-aLq"/>
                         <outlet property="usernameUnderline" destination="Uji-9g-l6C" id="GAN-CJ-h7s"/>
                         <outlet property="youthTag" destination="FGv-EE-oXV" id="dx5-xz-naw"/>
+                        <segue destination="5QU-o9-vad" kind="show" identifier="CreatedAccountSegue" id="TC2-ga-1Rw"/>
                     </connections>
                 </viewController>
             </objects>
@@ -786,7 +787,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="99" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="biS-Fi-NJp">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedCell" rowHeight="150" id="V8g-5R-wUi" customClass="FeedCell" customModule="VolunteerMe" customModuleProvider="target">
@@ -940,7 +941,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yuh-6c-88m">
-                                <rect key="frame" x="0.0" y="217" width="375" height="401"/>
+                                <rect key="frame" x="0.0" y="217" width="375" height="450"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeaderCell" id="Y3W-fU-d9W" customClass="HeaderCell" customModule="VolunteerMe" customModuleProvider="target">
@@ -1434,6 +1435,6 @@
         <image name="volunteer-icon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Ed0-t6-jLl"/>
+        <segue reference="TC2-ga-1Rw"/>
     </inferredMetricsTieBreakers>
 </document>
