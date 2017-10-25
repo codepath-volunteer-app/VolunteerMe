@@ -22,9 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     initializeParse()
     customAppearance()
 //    testApiCalls()
+    let storyboard = UIStoryboard(name: "Main", bundle: nil)
     
     if User.current() != nil {
         // Go straight to volunteer feed
+        // COMMENT OUT THIS LINE IF YOU WANT TO VIEW THE LOGIN SCREEN
+        window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "FeedNavigationViewController")
     }
 
     return true
