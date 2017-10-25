@@ -29,13 +29,13 @@ class FeedCell: UITableViewCell {
                 profileImage.setImageWith(imageUrl!)
             }
             tagsLabel.text = "Tags: "
-//            if let tags = event.tags {
-//                for tag in tags {
-//                    if let tagName = tag.name {
-//                        tagsLabel.text! += "\(tagName)"
-//                    }
-//                }
-//            }
+            if let tags = event.tags {
+                for tag in tags {
+                    if let tagName = tag.name {
+                        tagsLabel.text! += "\(tagName)"
+                    }
+                }
+            }
         }
     }
     
