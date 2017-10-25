@@ -58,7 +58,9 @@ class LoginViewController: UIViewController {
     } else {
       User.login(username: usernameTextField.text!, password: passwordTextField.text!) { (user) in
         self.onSuccess()
+        return
       }
+    createAlert(title: "Oops!", message: "That username and password combination doesn't already have an account. Tap 'Create Account' to make a new account.")
     }
   }
 

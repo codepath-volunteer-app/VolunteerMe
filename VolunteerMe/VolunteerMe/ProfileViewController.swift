@@ -11,7 +11,6 @@ import UIKit
 class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileName: UILabel!
-    @IBOutlet weak var profileUsername: UILabel!
     @IBOutlet weak var profileHours: UILabel!
     @IBOutlet weak var profileTags: UILabel!
     
@@ -22,9 +21,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     var currentUser: User? {
         didSet {
             profileName.text = currentUser!.name
-            profileUsername.text = currentUser!.username
-            profileHours.text = currentUser!.userDescription
+            profileHours.text = "4 hours"
             tags = currentUser!.interests!
+            
+            var tagText = ""
+            for tag in tags! {
+                tagText.append(tag.name!)
+                tagText.append("  ")
+            }
+            profileTags.text = tagText
             
             currentUser!.getParticipatingEvents(userEventType: .Upcoming) { (upcomingEvents) in
                 self.events.append(upcomingEvents)
@@ -58,6 +63,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         super.viewDidLoad()
         tableView.delegate = self
         tableView.dataSource = self
+        tableView.rowHeight = UITableViewAutomaticDimension
+        tableView.estimatedRowHeight = 150
         
         currentUser = User.current()
         // Do any additional setup after loading the view.

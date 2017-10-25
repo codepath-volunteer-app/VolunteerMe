@@ -14,6 +14,7 @@ class HeaderCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        backgroundColor = Color.WHITE
         // Initialization code
     }
 
