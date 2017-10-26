@@ -31,6 +31,20 @@ class User: PFUser {
     @NSManaged var userType: String?
     @NSManaged var interests: [Tag]?
 
+    override class func current() -> User? {
+        if let user = PFUser.current() {
+            if let tags = (user as! User).interests {
+                for tag in tags {
+                    tag.fetchIfNeededInBackground()
+                }
+            }
+            
+            return user as! User
+        }
+
+        return nil
+    }
+
     fileprivate class func _createNewUser(username:String, password: String, name: String?, userDescription: String?, userType: UserType?, profilePictureUrl: String?, tags: [Tag]?, successCallback: @escaping (User) -> ()) {
         let user = User()
         user.username = username
