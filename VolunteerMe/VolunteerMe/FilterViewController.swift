@@ -24,21 +24,23 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
     
     @IBOutlet weak var tableView: UITableView!
     
-    let dealsSection: SectionStruct = SectionStruct(headerTitle: "Deals", cellType: "switchCell",
+    /*let dealsSection: SectionStruct = SectionStruct(headerTitle: "Deals", cellType: "switchCell",
                                                     data:[("Offering Deals", "Offering Deals")],
                                                     results:[Int: Bool](), checked_index: 0)
+    */
     let distanceSection: SectionStruct = SectionStruct(headerTitle: "Distance", cellType: "filterCell",
-                                                       data:[("Auto", 8047), ("0.2 miles", 321),
-                                                             ("1 mile", 1610), ("5 miles", 8046),
-                                                             ("10 miles", 16100), ("20 miles", 32187)],
+                                                       data:[("Auto", 10000.0), ("0.2 miles", 0.2),
+                                                             ("1 mile", 1.0), ("5 miles", 5.0),
+                                                             ("10 miles", 10.0), ("20 miles", 20.0)],
                                                        results:[Int: Bool](), checked_index: 0)
-    let sortBySection: SectionStruct = SectionStruct(headerTitle: "SortBy", cellType: "filterCell",
+  /*  let sortBySection: SectionStruct = SectionStruct(headerTitle: "SortBy", cellType: "filterCell",
                                                      data:[("Best Match", "Best Match"), ("Distance", "distance"),
                                                            ("Highest Rates", "higest Rated")],
                                                      results:[Int: Bool](), checked_index: 0)
-    let categorySection: SectionStruct = SectionStruct(headerTitle: "Category", cellType: "switchCell",
-                                                       data:[("African", "african"), ("Afghan", "afghani"),
-                                                             ("American", "tradamerican"),("Arabic","Arabian"), ("Indian", "indpak")],
+ */
+    let tagsSection: SectionStruct = SectionStruct(headerTitle: "Tags", cellType: "switchCell",
+                                                       data:[("Fun Reading", "funreading"), ("Animals", "animals"),
+                                                             ("Construction", "construction"),("Feed the Hungry","feedthehungry"), ("Play", "play")],
                                                        results:[Int: Bool](), checked_index: 0)
     
     
@@ -54,7 +56,7 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         tableView.dataSource = self
         tableView.delegate = self
         
-        sections = [0: dealsSection, 1: distanceSection, 2: sortBySection, 3: categorySection]
+        sections = [0:distanceSection,1: tagsSection]
     }
     
     override func didReceiveMemoryWarning() {
@@ -68,30 +70,26 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
         var filters = [String:Any]()
         
         //Get Deals
-        let isDeal = sections?[0]?.results[0]
-        filters["deals"] = isDeal
+//        let isDeal = sections?[0]?.results[0]
+//        filters["deals"] = isDeal
         
         //Get categories
-        var categories = [String]()
-        let results = sections?[3]?.results
+        var tags = [String]()
+        let results = sections?[1]?.results
         for (index, isSelected) in results! {
             if isSelected{
-                categories.append(sections?[3]?.data?[index].1 as! String)
+                tags.append(sections?[1]?.data?[index].1 as! String)
             }
         }
-        if categories.count > 0 {
-            filters["categories"] = categories
+        if tags.count > 0 {
+            filters["tags"] = tags
         }
         
         //Get distance
-        let row_selected = sections?[1]?.checked_index
-        let distance_filter = sections?[1]?.data?[row_selected!].1 as? Int
+        let row_selected = sections?[0]?.checked_index
+        let distance_filter = sections?[0]?.data?[row_selected!].1 as? Double
         filters["distance"] = distance_filter
         
-        //Sort By
-        let sort_row_selected = sections?[2]?.checked_index
-        let sortBy = sections?[2]?.data?[sort_row_selected!].1 ?? "Best Match"
-        filters["sortBy"] = sortBy
         
         
         //Add the categories in filter if more that 0
@@ -162,18 +160,11 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
             cell = tableView.dequeueReusableCell(withIdentifier: "filterCell") as! FilterCell
         }
         
-        cell?.layer.borderWidth = 1.0
-        cell?.layer.borderColor = UIColor.gray.cgColor
+        cell?.layer.borderWidth = 0.5
+     /*   cell?.layer.borderColor = UIColor.gray.cgColor
         cell?.layer.cornerRadius = 5
+ */
         
-        //        switch section_index {
-        //        case 1:
-        //            //cell = tableView.dequeueReusableCell(withIdentifier: "filterCell") as! FilterCell
-        //        case 2:
-        //           // cell = tableView.dequeueReusableCell(withIdentifier: "switchCell") as! SwitchCell
-        //        default:
-        //            //cell = tableView.dequeueReusableCell(withIdentifier: "switchCell") as! SwitchCell
-        //        }
         return cell!
     }
     

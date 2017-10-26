@@ -84,14 +84,15 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
     
     // MARK: - Delegate
     func filterViewController(filterViewController: FilterViewController, didUpdateFilters filter: [String: Any]){
-        let categories = filter["categories"] as? [String]
-        let isDeal = filter["deals"] as? Bool
+        let tags = filter["tags"] as? [String]
+        //let isDeal = filter["deals"] as? Bool
        // let sortBy = filter["sortBy"] as! [String]
-        let distance = filter["distance"] as! Int
-        print(categories ?? [])
-        print(isDeal ?? true)
-       // print(sortBy)
+        let distance = filter["distance"] as! Double
+        print(tags ?? [])
         print(distance)
+        
+        getEventsForFilter(searchText: searchText, tags: tags, distance: distance)
+
         
         // Call the search data method here and update the tableView. 
         
@@ -159,6 +160,19 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
     private func searchBarIsEmpty() -> Bool {
         // Returns true if the text is empty or nil
         return searchController.searchBar.text?.isEmpty ?? true
+    }
+    
+    private func getEventsForFilter(searchText: String?, tags: [String]?, distance:Double ){
+        Event.getNearbyEvents(radiusInMiles: distance, searchString: searchText, tags: tags, limit: 20) { (eventsReturned: [Event]) in
+            print("I am in here")
+            if self.isFiltering(){
+                self.searchedEvents = eventsReturned
+            } else {
+                self.events = eventsReturned
+            }
+            self.tableView.reloadData()
+        }
+       
     }
 
 }
