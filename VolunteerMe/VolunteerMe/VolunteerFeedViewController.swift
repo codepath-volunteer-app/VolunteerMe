@@ -13,6 +13,8 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
     
     let searchController = UISearchController(searchResultsController: nil)
     var events: [Event]?
+    var searchedEvents: [Event]?
+    var searchText: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,13 +40,22 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
     
     // MARK: - Table View Delegate
     public func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if isFiltering() {
+            return searchedEvents?.count ?? 0
+        }
         return events?.count ?? 0
         
     }
     
     public func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell") as! FeedCell
-        cell.event = (events?[indexPath.row])!
+        var event: Event?
+        if isFiltering() {
+            event = (searchedEvents?[indexPath.row])!
+        } else {
+            event = (events?[indexPath.row])!
+        }
+        cell.event = event!
         return cell
     }
     
@@ -104,8 +115,8 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
     
     public func updateSearchResults(for searchController: UISearchController) {
         if let searchText = searchController.searchBar.text {
-            print("Search Text: \(searchText)")
-            // todo: get data here
+            self.searchText = searchText
+            getEventsForSearch(searchText: searchText)
         }
         
     }
@@ -118,7 +129,9 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
 
     public func didDismissSearchController(_ searchController: UISearchController) {
         // When cancelled show the previous data set
-        print("done from the controller")
+        searchedEvents = []
+        searchText = nil
+        tableView.reloadData()
     }
     
     // MARK: - Network call
@@ -126,10 +139,26 @@ class VolunteerFeedViewController: UIViewController, UITableViewDelegate, UITabl
         Event.getNearbyEvents(radiusInMiles: 10000, searchString: nil, tags: nil, limit: 20) { (eventsReturned: [Event]) in
             print("I am in here")
             self.events = eventsReturned
-            for event in self.events! {
-                event.printHumanReadableTestString()
-            }
             self.tableView.reloadData()
         }
     }
+    
+    func getEventsForSearch(searchText: String){
+        Event.getNearbyEvents(radiusInMiles: 10000, searchString: searchText, tags: nil, limit: 20) { (eventsReturned: [Event]) in
+            print("I am in here")
+            self.searchedEvents = eventsReturned
+            self.tableView.reloadData()
+        }
+    }
+    
+    //MARK: - Search
+    private func isFiltering() -> Bool {
+        return searchController.isActive && !searchBarIsEmpty()
+    }
+    
+    private func searchBarIsEmpty() -> Bool {
+        // Returns true if the text is empty or nil
+        return searchController.searchBar.text?.isEmpty ?? true
+    }
+
 }
