@@ -27,6 +27,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     if User.current() != nil {
         // Go straight to volunteer feed
         // COMMENT OUT THIS LINE IF YOU WANT TO VIEW THE LOGIN SCREEN
+        
         window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "FeedNavigationViewController")
     }
 
