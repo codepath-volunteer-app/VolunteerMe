@@ -30,17 +30,25 @@ class EventDetailsViewController: UIViewController {
         
         if event != nil {
             titleText.text = event!.name
-            eventDate.text = event!.datetime
-            eventTime.text = event!.datetime
+            eventDate.text = event!.humanReadableDateString
+            eventTime.text = event!.humanReadableTimeString
 //            eventImage.setImageWith(URL(string: event!.imageUrl!)!)
-            registered = event!.attendees.contains(User.current()!)
+            event!.fetchAttendees(successCallback: { (usersAttending) in
+                for attendee in usersAttending {
+                    if attendee.objectId == User.current()!.objectId {
+                        self.registered = true
+                        self.registerButtonBackground.alpha = 0.5
+                        break
+                    }
+                }
+            })
         }
         // Do any additional setup after loading the view.
     }
     
     @IBAction func registerButtonTapped(_ sender: Any) {
         if registered {
-            self.createAlert(title: "You're Already Registered", message: "You are already registered for this event. Would you like to cancel?")
+            self.alreadyRegisteredAlert()
         } else {
             event!.registerUser(user: User.current()!, successCallback: { (successfullyRegistered) in
                 if successfullyRegistered {
@@ -61,14 +69,15 @@ class EventDetailsViewController: UIViewController {
     }
     
     func alreadyRegisteredAlert() {
-        let alertController = UIAlertController(title: "You're Already Registered", message: "You are already registered to volunteer at this event. Would you like to cancel?", preferredStyle: UIAlertControllerStyle.alert)
-        alertController.addAction(UIAlertAction(title: "No, I will be there!", style: UIAlertActionStyle.default, handler: nil))
-        alertController.addAction(UIAlertAction(title: "Yes, I'd like to cancel", style: UIAlertActionStyle.cancel, handler: {(alert: UIAlertAction!) in
+        let alertController = UIAlertController(title: "You're Already Registered", message: "You are already registered to volunteer at this event.  Would you like to cancel?", preferredStyle: UIAlertControllerStyle.alert)
+        alertController.addAction(UIAlertAction(title: "Cancel my registration", style: .default, handler: { (action: UIAlertAction!) in
             self.registered = false
             self.registerButtonBackground.alpha = 1.0
-            //unregister
         }))
-        self.present(alertController, animated: true, completion: nil)
+        alertController.addAction(UIAlertAction(title: "Stay registered", style: .cancel, handler: { (action: UIAlertAction!) in
+            // ok
+        }))
+        present(alertController, animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {

@@ -1028,6 +1028,7 @@
                                             <outlet property="eventImage" destination="M3f-p4-5ER" id="y1o-OO-XCF"/>
                                             <outlet property="time" destination="9l7-Hs-A8m" id="e0i-pi-VLr"/>
                                             <outlet property="title" destination="qUV-ld-R2v" id="PqC-L1-RA2"/>
+                                            <segue destination="2fH-w3-zc8" kind="show" identifier="displayEventDetails" id="oB3-ob-ntH"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -1076,7 +1077,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="KFX-TJ-0cX" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="564" y="756.97151424287858"/>
+            <point key="canvasLocation" x="598" y="759"/>
         </scene>
         <!--Event Details View Controller-->
         <scene sceneID="0Vi-cP-Qgp">
@@ -1206,7 +1207,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1311.2" y="756.97151424287858"/>
+            <point key="canvasLocation" x="1345" y="759"/>
         </scene>
         <!--Filter-->
         <scene sceneID="fiw-V8-VEm">
@@ -1431,5 +1432,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="TC2-ga-1Rw"/>
+        <segue reference="oB3-ob-ntH"/>
     </inferredMetricsTieBreakers>
 </document>

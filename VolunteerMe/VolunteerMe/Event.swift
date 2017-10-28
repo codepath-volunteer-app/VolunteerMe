@@ -30,10 +30,21 @@ class Event:PFObject, PFSubclassing {
         get {
             if let datetime = datetime {
                 let date = Date(timeIntervalSince1970: Double(datetime)!)
-                
                 return date.format(with: .long)
             }
-            
+            return nil
+        }
+    }
+    var humanReadableTimeString: String? {
+        get {
+            if let datetime = datetime {
+                let date = Date(timeIntervalSince1970: Double(datetime)!)
+                let formatter = DateFormatter()
+                formatter.dateFormat = "h:mm a"
+                formatter.amSymbol = "AM"
+                formatter.pmSymbol = "PM"
+                return formatter.string(from: date)
+            }
             return nil
         }
     }

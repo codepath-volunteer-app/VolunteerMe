@@ -96,15 +96,24 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         cell.event = events[indexPath.section][indexPath.row]
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
 
-    /*
+
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "displayEventDetails" {
+            let cell = sender as! EventCell
+            let eventDetailsController = segue.destination as! EventDetailsViewController
+            eventDetailsController.event = cell.event
+        }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
-    */
+
 
 }
