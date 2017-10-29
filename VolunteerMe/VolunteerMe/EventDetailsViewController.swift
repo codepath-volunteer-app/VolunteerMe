@@ -73,6 +73,13 @@ class EventDetailsViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Cancel my registration", style: .default, handler: { (action: UIAlertAction!) in
             self.registered = false
             self.registerButtonBackground.alpha = 1.0
+          User.current()!.unregisterEvent(event: self.event!, successCallback: { (unregistered) in
+            if unregistered {
+              self.createAlert(title: "Unregistered", message: "You successfully unregistered for this event")
+            } else {
+              self.createAlert(title: "Oops!", message: "Something went wrong. Please try again later or directly contact the organization.")
+            }
+          })
         }))
         alertController.addAction(UIAlertAction(title: "Stay registered", style: .cancel, handler: { (action: UIAlertAction!) in
             // ok
