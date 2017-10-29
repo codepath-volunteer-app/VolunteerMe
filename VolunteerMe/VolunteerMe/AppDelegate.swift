@@ -109,14 +109,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     Tag.createNewTag(name: "housing") { _ in
     }
 
-    User.login(username: "teaflavored", password: "teaflavored") {
-        (user: User) in
-        print("==========================")
-        print("current user")
-        print("==========================")
-        print(User.current())
-    }
-    
     // Should preload all the tags at the load of the app
     Tag.getTagsByNameArray(["fun", "full day", "reading", "arts"]) {
         (tags: [Tag]) in

@@ -56,12 +56,14 @@ class LoginViewController: UIViewController {
     } else if passwordTextField.text == nil || passwordTextField.text == "" {
       createAlert(title: "Oops!", message: "Please enter your password.")
     } else {
-      User.login(username: usernameTextField.text!, password: passwordTextField.text!) { (user) in
-        self.onSuccess()
-        return
+        User.login(username: usernameTextField.text!, password: passwordTextField.text!, successCallback: {
+            (user) in
+            self.onSuccess()
+        }) {
+            (error: Error) in
+                self.createAlert(title: "Oops!", message: "That username and password combination doesn't already have an account. Tap 'Create Account' to make a new account.")
+                }
       }
-    createAlert(title: "Oops!", message: "That username and password combination doesn't already have an account. Tap 'Create Account' to make a new account.")
-    }
   }
 
   func createAlert(title: String, message: String) {

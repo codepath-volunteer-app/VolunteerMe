@@ -93,10 +93,10 @@ class User: PFUser {
         }
     }
     
-    class func login(username: String, password: String, successCallback: @escaping (User) -> ()) -> () {
+    class func login(username: String, password: String, successCallback: @escaping (User) -> (), errorCallback: @escaping (Error) -> ()) -> () {
         logInWithUsername(inBackground: username, password: password) { (user: PFUser?, error: Error?) in
             if let error = error {
-                print("User log in failed: \(error.localizedDescription)")
+                errorCallback(error)
             } else {
                 if let interests = User.current()!.interests {
                     for interest in interests {
