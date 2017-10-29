@@ -14,23 +14,63 @@ class OrganizationCreateAccountViewController: UIViewController {
     @IBOutlet weak var subtitleText: UILabel!
     @IBOutlet weak var usernameField: UITextField!
     @IBOutlet weak var passwordField: UITextField!
+    @IBOutlet weak var descriptionField: UITextField!
     @IBOutlet weak var usernameUnderline: UIView!
     @IBOutlet weak var passwordUnderline: UIView!
+    @IBOutlet weak var descriptionUnderline: UIView!
     @IBOutlet weak var createAccountButtonBackground: UIView!
     @IBOutlet weak var createAccountButtonText: UILabel!
+
+    @IBOutlet weak var animalsTag: UILabel!
+    @IBOutlet weak var discriminationTag: UILabel!
+    @IBOutlet weak var educationTag: UILabel!
+    @IBOutlet weak var elderlyTag: UILabel!
+    @IBOutlet weak var environmentTag: UILabel!
+    @IBOutlet weak var healthTag: UILabel!
+    @IBOutlet weak var homelessnessTag: UILabel!
+    @IBOutlet weak var hungerTag: UILabel!
+    @IBOutlet weak var youthTag: UILabel!
     
-    
+    var tagLabels: [UILabel] = [UILabel]()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         titleText.textColor = Color.PRIMARY_COLOR
         subtitleText.textColor = Color.PRIMARY_COLOR
         usernameUnderline.backgroundColor = Color.PRIMARY_COLOR
         passwordUnderline.backgroundColor = Color.PRIMARY_COLOR
+        descriptionUnderline.backgroundColor = Color.PRIMARY_COLOR
         
         createAccountButtonBackground.backgroundColor = Color.PRIMARY_COLOR
         createAccountButtonBackground.layer.cornerRadius = 8.0
         createAccountButtonBackground.clipsToBounds = true
         createAccountButtonText.textColor = Color.WHITE
+
+        tagLabels = [
+          animalsTag,
+          discriminationTag,
+          educationTag,
+          elderlyTag,
+          environmentTag,
+          healthTag,
+          homelessnessTag,
+          hungerTag,
+          youthTag,
+        ]
+
+        var i = 0
+        for tag in tagLabels {
+          tag.tag = i
+          tag.backgroundColor = Color.PRIMARY_COLOR
+          tag.textColor = Color.WHITE
+          tag.text = " " + tag.text! + " "
+          tag.layer.cornerRadius = 8.0
+          tag.clipsToBounds = true
+          tag.isUserInteractionEnabled = true
+          let tapGesture = UITapGestureRecognizer(target: self, action: #selector(tagTapped(gestureRecognizer:)))
+          tag.addGestureRecognizer(tapGesture)
+          i += 1
+        }
         // Do any additional setup after loading the view.
     }
     
@@ -38,15 +78,51 @@ class OrganizationCreateAccountViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+
+    func tagTapped(gestureRecognizer: UITapGestureRecognizer) {
+      let tag = tagLabels[gestureRecognizer.view!.tag]
+      if tag.backgroundColor == Color.PRIMARY_COLOR {
+        tag.backgroundColor = Color.SECONDARY_COLOR
+      } else {
+        tag.backgroundColor = Color.PRIMARY_COLOR
+      }
+      // Mark tag as selected
+    }
+
     
     @IBAction func cancelButtonTapped(_ sender: Any) {
       dismiss(animated: true, completion: nil)
     }
     
     @IBAction func createAccountButtonTapped(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
+      // Create account
+      var selectedTags: [String] = [String]()
+      for tag in tagLabels {
+        if tag.backgroundColor == Color.SECONDARY_COLOR {
+          selectedTags.append(tag.text!)
+        }
+      }
+
+      if usernameField.text == nil || usernameField.text == "" {
+        createAlert(title: "Oops!", message: "Please choose a username.")
+      } else if passwordField.text == nil || passwordField.text == "" {
+        createAlert(title: "Oops!", message: "Please choose a password.")
+      } else if descriptionField.text == nil || descriptionField.text == "" {
+        createAlert(title: "Oops!", message: "Please write a short description about your organization")
+      } else if selectedTags.count == 0 {
+        createAlert(title: "Oops!", message: "Please select any categories that are relevant to your organization.")
+      } else {
+        User.createNewUser(username: usernameField.text!, password: passwordField.text!, name: usernameField.text, userDescription: descriptionField.text, userType: .Organization, profilePictureUrl: nil, tags: selectedTags) { (user) in
+          self.performSegue(withIdentifier: "orgCreatedAccountSegue", sender: self)
+        }
+      }
     }
-    
+
+    func createAlert(title: String, message: String) {
+      let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+      alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+      self.present(alertController, animated: true, completion: nil)
+    }
     /*
      // MARK: - Navigation
      
