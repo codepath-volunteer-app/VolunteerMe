@@ -23,6 +23,7 @@ class FeedCell: UITableViewCell {
             feedDescriptionLabel.text = event.eventDescription
             dateLabel.text = event.humanReadableDateString
             feedTitleLabel.text = event.name
+            eventTimeLabel.text = event.humanReadableTimeRange
             
             if let imageUrlString = event.imageUrl {
                 let imageUrl = URL(string: imageUrlString)
