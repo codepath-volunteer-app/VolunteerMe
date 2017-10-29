@@ -29,13 +29,19 @@ class FeedCell: UITableViewCell {
                 let imageUrl = URL(string: imageUrlString)
                 profileImage.setImageWith(imageUrl!)
             }
-            tagsLabel.text = "Tags: "
+
             if let tags = event.tags {
-                for tag in tags {
-                    if let tagName = tag.name {
-                        tagsLabel.text! += "\(tagName)"
-                    }
-                }
+                let tagNames: [String] = tags.map({ (tag: Tag) -> String? in
+                    return tag.name
+                }).filter({ (tagName: String?) -> Bool in
+                    return tagName != nil
+                }).map({ (tagName: String?) -> String in
+                    return tagName!
+                })
+                
+                let listOfTagNames = tagNames.joined(separator: ", ")
+                
+                tagsLabel.text = "Tags: \(listOfTagNames)"
             }
         }
     }
