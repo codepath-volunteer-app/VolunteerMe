@@ -31,15 +31,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
             profileTags.text = tagText
             
-            currentUser!.getParticipatingEvents(userEventType: .Upcoming) { (upcomingEvents) in
-                self.events.append(upcomingEvents)
-                self.tableView.reloadData()
-            }
-
-            currentUser!.getParticipatingEvents(userEventType: .Past) { (pastEvents) in
-                self.events.append(pastEvents)
-                self.tableView.reloadData()
-            }
+            updateEventsForCurrentUser()
         }
     }
     
@@ -103,18 +95,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
 
     func onUnregister() {
         self.events = []
-
-        currentUser!.getParticipatingEvents(userEventType: .Upcoming) { (upcomingEvents) in
-            print(upcomingEvents)
-            self.events.append(upcomingEvents)
-            self.tableView.reloadData()
-        }
-        
-        currentUser!.getParticipatingEvents(userEventType: .Past) { (pastEvents) in
-            print(pastEvents)
-            self.events.append(pastEvents)
-            self.tableView.reloadData()
-        }
+        updateEventsForCurrentUser()
     }
 
     // MARK: - Navigation
@@ -131,5 +112,19 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Pass the selected object to the new view controller.
     }
 
-
+    fileprivate func updateEventsForCurrentUser() {
+        currentUser!.getParticipatingEvents(userEventType: .All) { (allEvents: [Event]) in
+            let pastEvents = allEvents.filter({ (event: Event) -> Bool in
+                return event.isInPast()
+            })
+            
+            let upcomingEvents = allEvents.filter({ (event: Event) -> Bool in
+                return event.isInFuture()
+            })
+            
+            self.events.append(upcomingEvents)
+            self.events.append(pastEvents)
+            self.tableView.reloadData()
+        }
+    }
 }
