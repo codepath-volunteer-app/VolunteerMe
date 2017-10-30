@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EventDetailsViewControllerDelegate {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileName: UILabel!
     @IBOutlet weak var profileHours: UILabel!
@@ -101,6 +101,21 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    func onUnregister() {
+        self.events = []
+
+        currentUser!.getParticipatingEvents(userEventType: .Upcoming) { (upcomingEvents) in
+            print(upcomingEvents)
+            self.events.append(upcomingEvents)
+            self.tableView.reloadData()
+        }
+        
+        currentUser!.getParticipatingEvents(userEventType: .Past) { (pastEvents) in
+            print(pastEvents)
+            self.events.append(pastEvents)
+            self.tableView.reloadData()
+        }
+    }
 
     // MARK: - Navigation
 
@@ -110,6 +125,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             let cell = sender as! EventCell
             let eventDetailsController = segue.destination as! EventDetailsViewController
             eventDetailsController.event = cell.event
+            eventDetailsController.delegate = self
         }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.

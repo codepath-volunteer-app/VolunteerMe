@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol EventDetailsViewControllerDelegate {
+    func onUnregister() -> ()
+}
+
 class EventDetailsViewController: UIViewController {
     
     @IBOutlet weak var titleText: UILabel!
@@ -19,6 +23,7 @@ class EventDetailsViewController: UIViewController {
     @IBOutlet weak var descriptionText: UILabel!
     @IBOutlet weak var map: UIView!
     
+    var delegate: EventDetailsViewControllerDelegate?
     private var registered: Bool = false
     var event: Event?
     
@@ -75,7 +80,11 @@ class EventDetailsViewController: UIViewController {
             self.registerButtonBackground.alpha = 1.0
           User.current()!.unregisterEvent(event: self.event!, successCallback: { (unregistered) in
             if unregistered {
-              self.createAlert(title: "Unregistered", message: "You successfully unregistered for this event")
+                self.createAlert(title: "Unregistered", message: "You successfully unregistered for this event")
+
+                if let delegate = self.delegate {
+                    delegate.onUnregister()
+                }
             } else {
               self.createAlert(title: "Oops!", message: "Something went wrong. Please try again later or directly contact the organization.")
             }
