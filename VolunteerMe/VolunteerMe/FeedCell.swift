@@ -41,7 +41,11 @@ class FeedCell: UITableViewCell {
                 
                 let listOfTagNames = tagNames.joined(separator: ", ")
                 
-                tagsLabel.text = "Tags: \(listOfTagNames)"
+                if listOfTagNames.count > 0 {
+                    tagsLabel.text = "Tags: \(listOfTagNames)"
+                } else {
+                    tagsLabel.text = nil
+                }
             }
         }
     }

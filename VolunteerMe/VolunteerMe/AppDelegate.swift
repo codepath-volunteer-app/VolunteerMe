@@ -87,27 +87,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        print("==========================")
 //        user.printHumanReadableTestString()
 //    }
-    
-    Tag.createNewTag(name: "animals") { _ in
-    }
-    Tag.createNewTag(name: "lgbt") { _ in
-    }
-    Tag.createNewTag(name: "board development") { _ in
-    }
-    Tag.createNewTag(name: "media") { _ in
-    }
-    Tag.createNewTag(name: "politics") { _ in
-    }
-    Tag.createNewTag(name: "women") { _ in
-    }
-    Tag.createNewTag(name: "men") { _ in
-    }
-    Tag.createNewTag(name: "children") { _ in
-    }
-    Tag.createNewTag(name: "hunger") { _ in
-    }
-    Tag.createNewTag(name: "housing") { _ in
-    }
 
     // Should preload all the tags at the load of the app
     Tag.getTagsByNameArray(["fun", "full day", "reading", "arts"]) {
