@@ -182,4 +182,18 @@ class User: PFUser {
         print("username: \(username)")
         print("userDescription: \(userDescription)")
     }
+
+    func getCompletedEventsHours(successCallback: @escaping (Int) -> ()) -> () {
+        EventAttendee.getEventsForUser(user: self) { (events: [Event]) in
+            let completedEvents = events.filter({ (event: Event) -> Bool in
+                return event.isInPast()
+            })
+            
+            let completedHours = completedEvents.reduce(0, { (result: Int, event: Event) -> Int in
+                return result + Int(floor(Double(Int(event.duration!) / 3600)))
+            })
+            
+            successCallback(completedHours)
+        }
+    }
 }

@@ -32,6 +32,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             profileTags.text = tagText
             
             updateEventsForCurrentUser()
+            currentUser!.getCompletedEventsHours { (totalHours: Int) in
+                self.profileHours.text = "\(totalHours) hours completed"
+            }
         }
     }
     
