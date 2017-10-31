@@ -58,7 +58,12 @@ class Event:PFObject, PFSubclassing {
                     let startDate = Date(timeIntervalSince1970: (Double(datetime)!))
                     let endDate = Date(timeIntervalSince1970: (Double(datetime)! + Double(duration)))
                     
-                    return "\(startDate.format(with: "H:mm") ) - \(endDate.format(with: "H:mm"))"
+                    let formatter = DateFormatter()
+                    formatter.dateFormat = "h:mm a"
+                    formatter.amSymbol = "AM"
+                    formatter.pmSymbol = "PM"
+                    
+                    return "\(formatter.string(from: startDate)) - \(formatter.string(from: endDate))"
                 }
             }
 
