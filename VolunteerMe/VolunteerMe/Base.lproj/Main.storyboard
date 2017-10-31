@@ -655,50 +655,50 @@
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Discrimination" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xyV-ra-gFr">
-                                        <rect key="frame" x="77" y="8" width="109" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Education" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xyV-ra-gFr">
+                                        <rect key="frame" x="77" y="8" width="77" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Education" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FIf-xs-xmP">
-                                        <rect key="frame" x="8" y="37" width="77" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reading" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FIf-xs-xmP">
+                                        <rect key="frame" x="8" y="37" width="63" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Elderly" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0U-di-Ec4">
-                                        <rect key="frame" x="93" y="37" width="52" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Homelessness" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S0U-di-Ec4">
+                                        <rect key="frame" x="79" y="37" width="112" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Environemnt" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qb-e9-hvg">
-                                        <rect key="frame" x="153" y="37" width="96" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Women" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9qb-e9-hvg">
+                                        <rect key="frame" x="199" y="37" width="59" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Health" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5f-uu-WIw">
-                                        <rect key="frame" x="8" y="66" width="50" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Men" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i5f-uu-WIw">
+                                        <rect key="frame" x="8" y="66" width="34" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Hunger" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="sSl-LJ-1OS">
-                                        <rect key="frame" x="186" y="66" width="57" height="21"/>
+                                        <rect key="frame" x="113" y="66" width="57" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Youth" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rUA-fP-ZnF">
-                                        <rect key="frame" x="8" y="95" width="45" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Media" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rUA-fP-ZnF">
+                                        <rect key="frame" x="8" y="95" width="47" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Homelessness" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vuZ-mM-zLU">
-                                        <rect key="frame" x="66" y="66" width="112" height="21"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Politics" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vuZ-mM-zLU">
+                                        <rect key="frame" x="50" y="66" width="55" height="21"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
@@ -784,25 +784,25 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="animalsTag" destination="qyK-wF-PBq" id="kWU-3f-Wlk"/>
+                        <outlet property="animalsTag" destination="qyK-wF-PBq" id="fgM-bs-iLi"/>
                         <outlet property="createAccountButtonBackground" destination="FpK-Ri-9fF" id="D9p-Ea-nc6"/>
                         <outlet property="createAccountButtonText" destination="FpW-Lx-Tbx" id="aWx-Rl-P4o"/>
                         <outlet property="descriptionField" destination="i2U-8F-9c7" id="QM9-Nm-McV"/>
                         <outlet property="descriptionUnderline" destination="roH-2H-ZSC" id="waW-wJ-n7N"/>
-                        <outlet property="discriminationTag" destination="xyV-ra-gFr" id="OQP-Hd-cPR"/>
-                        <outlet property="educationTag" destination="FIf-xs-xmP" id="Vf7-gW-MG3"/>
-                        <outlet property="elderlyTag" destination="S0U-di-Ec4" id="hKb-QU-Mac"/>
-                        <outlet property="environmentTag" destination="9qb-e9-hvg" id="srI-Pg-nlz"/>
-                        <outlet property="healthTag" destination="i5f-uu-WIw" id="YOj-nr-ofL"/>
-                        <outlet property="homelessnessTag" destination="vuZ-mM-zLU" id="sgC-QY-Zk4"/>
-                        <outlet property="hungerTag" destination="sSl-LJ-1OS" id="VQg-rZ-F44"/>
+                        <outlet property="educationTag" destination="xyV-ra-gFr" id="Z7K-U6-iaW"/>
+                        <outlet property="homelessnessTag" destination="S0U-di-Ec4" id="4EZ-An-zal"/>
+                        <outlet property="hungerTag" destination="sSl-LJ-1OS" id="dyQ-Y9-i4D"/>
+                        <outlet property="mediaTag" destination="rUA-fP-ZnF" id="94b-mt-xb0"/>
+                        <outlet property="menTag" destination="i5f-uu-WIw" id="XFz-YE-Bfn"/>
                         <outlet property="passwordField" destination="ShG-WH-feo" id="yVy-Zh-pL8"/>
                         <outlet property="passwordUnderline" destination="Mhq-64-3jj" id="JAD-Vw-qLD"/>
+                        <outlet property="politicsTag" destination="vuZ-mM-zLU" id="U7F-41-kEW"/>
+                        <outlet property="readingTag" destination="FIf-xs-xmP" id="ZjF-XJ-k9l"/>
                         <outlet property="subtitleText" destination="BpB-dU-gJ3" id="Jk0-p6-uQG"/>
                         <outlet property="titleText" destination="7of-kE-VZf" id="SbT-ls-gbh"/>
                         <outlet property="usernameField" destination="JPB-f8-nyY" id="EdB-PA-Vbw"/>
                         <outlet property="usernameUnderline" destination="bTj-fw-pUd" id="9aY-aB-1AS"/>
-                        <outlet property="youthTag" destination="rUA-fP-ZnF" id="Onb-Wj-YgL"/>
+                        <outlet property="womenTag" destination="9qb-e9-hvg" id="fHR-W7-OZy"/>
                         <segue destination="5QU-o9-vad" kind="show" identifier="orgCreatedAccountSegue" id="kEE-vx-6XR"/>
                     </connections>
                 </viewController>
@@ -1492,7 +1492,7 @@
         <image name="volunteer-icon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TC2-ga-1Rw"/>
+        <segue reference="kEE-vx-6XR"/>
         <segue reference="oB3-ob-ntH"/>
     </inferredMetricsTieBreakers>
 </document>

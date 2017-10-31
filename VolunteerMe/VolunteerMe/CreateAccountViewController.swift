@@ -9,7 +9,7 @@
 import UIKit
 
 class CreateAccountViewController: UIViewController {
-  fileprivate static let mapOfTagStringsToTagNames = [
+  static let mapOfTagStringsToTagNames = [
     "Animals": "animals",
     "Education": "education",
     "Reading": "reading",
