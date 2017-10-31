@@ -846,7 +846,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="99" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="biS-Fi-NJp">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedCell" rowHeight="150" id="V8g-5R-wUi" customClass="FeedCell" customModule="VolunteerMe" customModuleProvider="target">
@@ -994,7 +994,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yuh-6c-88m">
-                                <rect key="frame" x="0.0" y="217" width="375" height="401"/>
+                                <rect key="frame" x="0.0" y="217" width="375" height="450"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="79" id="Y3W-fU-d9W" customClass="HeaderCell" customModule="VolunteerMe" customModuleProvider="target">
@@ -1254,11 +1254,8 @@
                         <outlet property="eventImage" destination="PIW-R8-tBd" id="7O0-oi-Uve"/>
                         <outlet property="eventTime" destination="AD7-lM-SYE" id="oY3-nZ-P6c"/>
                         <outlet property="map" destination="Rhp-NV-AmE" id="ZpH-8W-LpP"/>
-<<<<<<< HEAD
-                        <outlet property="mapView" destination="5Es-Mx-oAG" id="o7A-hZ-rwa"/>
-=======
+                        <outlet property="mapView" destination="5Es-Mx-oAG" id="vZQ-l2-f6U"/>
                         <outlet property="registerButton" destination="9yv-jV-tiU" id="Lti-sL-lw1"/>
->>>>>>> 1ca11660248d4e6f41ff28c06261ce59eaf4a9e5
                         <outlet property="registerButtonBackground" destination="9yv-jV-tiU" id="eWF-y4-1hp"/>
                         <outlet property="registerButtonLabel" destination="m6t-t1-FXn" id="4WQ-XI-Zws"/>
                         <outlet property="titleText" destination="ANE-gu-ODG" id="NFu-Hc-Le3"/>
@@ -1495,11 +1492,7 @@
         <image name="volunteer-icon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
-        <segue reference="Ed0-t6-jLl"/>
-=======
         <segue reference="kEE-vx-6XR"/>
->>>>>>> 1ca11660248d4e6f41ff28c06261ce59eaf4a9e5
         <segue reference="oB3-ob-ntH"/>
     </inferredMetricsTieBreakers>
 </document>
