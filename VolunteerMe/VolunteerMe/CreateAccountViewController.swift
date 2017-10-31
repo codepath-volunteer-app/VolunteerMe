@@ -9,6 +9,17 @@
 import UIKit
 
 class CreateAccountViewController: UIViewController {
+  fileprivate static let mapOfTagStringsToTagNames = [
+    "Animals": "animals",
+    "Education": "education",
+    "Reading": "reading",
+    "Homelessness": "housing",
+    "Hunger": "hunger",
+    "Politics": "politics",
+    "Women": "women",
+    "Men": "men",
+    "Media": "media",
+  ]
 
   @IBOutlet weak var titleText: UILabel!
   @IBOutlet weak var subtitleText: UILabel!
@@ -23,14 +34,14 @@ class CreateAccountViewController: UIViewController {
   @IBOutlet weak var tagsView: UIView!
 
   @IBOutlet weak var animalsTag: UILabel!
-  @IBOutlet weak var discriminationTag: UILabel!
   @IBOutlet weak var educationTag: UILabel!
-  @IBOutlet weak var elderlyTag: UILabel!
-  @IBOutlet weak var environmentTag: UILabel!
-  @IBOutlet weak var healthTag: UILabel!
+  @IBOutlet weak var readingTag: UILabel!
   @IBOutlet weak var homelessnessTag: UILabel!
+  @IBOutlet weak var womenTag: UILabel!
+  @IBOutlet weak var menTag: UILabel!
+  @IBOutlet weak var politicsTag: UILabel!
   @IBOutlet weak var hungerTag: UILabel!
-  @IBOutlet weak var youthTag: UILabel!
+  @IBOutlet weak var mediaTag: UILabel!
 
   var tagLabels: [UILabel] = [UILabel]()
 
@@ -49,14 +60,14 @@ class CreateAccountViewController: UIViewController {
 
     tagLabels = [
       animalsTag,
-      discriminationTag,
       educationTag,
-      elderlyTag,
-      environmentTag,
-      healthTag,
+      readingTag,
       homelessnessTag,
+      womenTag,
+      menTag,
+      politicsTag,
       hungerTag,
-      youthTag,
+      mediaTag,
     ]
 
     var i = 0
@@ -100,7 +111,10 @@ class CreateAccountViewController: UIViewController {
     var selectedTags: [String] = [String]()
     for tag in tagLabels {
       if tag.backgroundColor == Color.SECONDARY_COLOR {
-        selectedTags.append(tag.text!)
+        if let tagName = CreateAccountViewController.mapOfTagStringsToTagNames[tag.text!.trimmingCharacters(in:
+            [" "])] {
+            selectedTags.append(tagName)
+        }
       }
     }
 

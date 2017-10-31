@@ -21,7 +21,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     var currentUser: User? {
         didSet {
             profileName.text = currentUser!.name
-            profileHours.text = "4 hours"
+            profileHours.text = "0 hours"
             tags = currentUser!.interests!
             
             var tagText = ""
