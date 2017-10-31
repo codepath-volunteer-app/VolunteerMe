@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1254,6 +1254,7 @@
                         <outlet property="eventImage" destination="PIW-R8-tBd" id="7O0-oi-Uve"/>
                         <outlet property="eventTime" destination="AD7-lM-SYE" id="oY3-nZ-P6c"/>
                         <outlet property="map" destination="Rhp-NV-AmE" id="ZpH-8W-LpP"/>
+                        <outlet property="registerButton" destination="9yv-jV-tiU" id="Lti-sL-lw1"/>
                         <outlet property="registerButtonBackground" destination="9yv-jV-tiU" id="eWF-y4-1hp"/>
                         <outlet property="registerButtonLabel" destination="m6t-t1-FXn" id="4WQ-XI-Zws"/>
                         <outlet property="titleText" destination="ANE-gu-ODG" id="NFu-Hc-Le3"/>

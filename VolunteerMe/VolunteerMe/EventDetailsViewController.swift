@@ -18,6 +18,7 @@ class EventDetailsViewController: UIViewController {
     @IBOutlet weak var eventDate: UILabel!
     @IBOutlet weak var eventTime: UILabel!
     @IBOutlet weak var eventImage: UIImageView!
+    @IBOutlet weak var registerButton: UIView!
     @IBOutlet weak var registerButtonBackground: UIView!
     @IBOutlet weak var registerButtonLabel: UILabel!
     @IBOutlet weak var descriptionText: UILabel!
@@ -36,17 +37,23 @@ class EventDetailsViewController: UIViewController {
         if event != nil {
             titleText.text = event!.name
             eventDate.text = event!.humanReadableDateString
-            eventTime.text = event!.humanReadableTimeString
+            eventTime.text = event!.humanReadableTimeRange
 //            eventImage.setImageWith(URL(string: event!.imageUrl!)!)
-            event!.fetchAttendees(successCallback: { (usersAttending) in
-                for attendee in usersAttending {
-                    if attendee.objectId == User.current()!.objectId {
-                        self.registered = true
-                        self.registerButtonBackground.alpha = 0.5
-                        break
+            
+            if event!.isInPast() {
+                self.registerButton.isHidden = true
+            } else {
+                self.registerButton.isHidden = false
+                event!.fetchAttendees(successCallback: { (usersAttending) in
+                    for attendee in usersAttending {
+                        if attendee.objectId == User.current()!.objectId {
+                            self.registered = true
+                            self.registerButtonBackground.alpha = 0.5
+                            break
+                        }
                     }
-                }
-            })
+                })
+            }
         }
         // Do any additional setup after loading the view.
     }
