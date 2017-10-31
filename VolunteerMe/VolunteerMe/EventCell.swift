@@ -21,9 +21,8 @@ class EventCell: UITableViewCell {
             title.text = event!.name
             descriptionLabel.text = event!.eventDescription
             time.text = "\(event!.humanReadableDateString!) at \(event!.humanReadableTimeString!)"
-            if let imageUrlString = event!.imageUrl {
-                let imageUrl = URL(string: imageUrlString)
-                eventImage.setImageWith(imageUrl!)
+            if let tags = event!.tags {
+//                eventImage.image = tags[0].getImage()
             }
         }
     }

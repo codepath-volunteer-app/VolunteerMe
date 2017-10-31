@@ -24,13 +24,11 @@ class FeedCell: UITableViewCell {
             dateLabel.text = event.humanReadableDateString
             feedTitleLabel.text = event.name
             eventTimeLabel.text = event.humanReadableTimeRange
-            
-            if let imageUrlString = event.imageUrl {
-                let imageUrl = URL(string: imageUrlString)
-                profileImage.setImageWith(imageUrl!)
-            }
+            tagsLabel.textColor = Color.SECONDARY_COLOR
 
             if let tags = event.tags {
+                profileImage.image = tags[0].getImage()
+
                 let tagNames: [String] = tags.map({ (tag: Tag) -> String? in
                     return tag.name
                 }).filter({ (tagName: String?) -> Bool in

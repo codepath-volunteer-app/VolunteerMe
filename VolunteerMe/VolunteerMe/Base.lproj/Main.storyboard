@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -856,7 +856,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="149.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="United_Way_of_Canada" translatesAutoresizingMaskIntoConstraints="NO" id="RT9-vO-x9l">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="United_Way_of_Canada" translatesAutoresizingMaskIntoConstraints="NO" id="RT9-vO-x9l">
                                                     <rect key="frame" x="8" y="8" width="75" height="75"/>
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="75" id="0Km-ID-hXT"/>
@@ -1039,9 +1039,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="132.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="center" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="volunteer-icon" translatesAutoresizingMaskIntoConstraints="NO" id="M3f-p4-5ER">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="default" translatesAutoresizingMaskIntoConstraints="NO" id="M3f-p4-5ER">
                                                     <rect key="frame" x="16" y="16" width="75" height="75"/>
-                                                    <color key="backgroundColor" red="0.10512421750017492" green="0.69047522668393779" blue="0.62287363477202473" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" constant="75" id="0q8-kb-14J"/>
                                                         <constraint firstAttribute="height" constant="75" id="O6e-y2-9ie"/>
@@ -1150,7 +1149,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="United_Way_of_Canada" translatesAutoresizingMaskIntoConstraints="NO" id="PIW-R8-tBd">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="United_Way_of_Canada" translatesAutoresizingMaskIntoConstraints="NO" id="PIW-R8-tBd">
                                 <rect key="frame" x="8" y="72" width="125" height="125"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="125" id="n8o-7k-pfF"/>
@@ -1487,6 +1486,7 @@
     </scenes>
     <resources>
         <image name="United_Way_of_Canada" width="376" height="384"/>
+        <image name="default" width="3889" height="2097"/>
         <image name="profile-icon" width="25" height="25"/>
         <image name="profile-image" width="132" height="95"/>
         <image name="volunteer-icon" width="25" height="25"/>

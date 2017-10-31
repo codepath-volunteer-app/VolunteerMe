@@ -37,6 +37,35 @@ class Tag: PFObject, PFSubclassing {
         }
     }
 
+    func getImage() -> UIImage {
+      switch self.name!.lowercased() {
+      case "animals":
+        return #imageLiteral(resourceName: "animal")
+      case "discrimination":
+        return #imageLiteral(resourceName: "discrimination")
+      case "education":
+        return #imageLiteral(resourceName: "education")
+      case "elderly":
+        return #imageLiteral(resourceName: "elderly")
+      case "environment":
+        return #imageLiteral(resourceName: "environment")
+      case "health":
+        return #imageLiteral(resourceName: "health")
+      case "homelessness":
+        return #imageLiteral(resourceName: "homelessness")
+      case "hunger":
+        return #imageLiteral(resourceName: "hunger")
+      case "media":
+        return #imageLiteral(resourceName: "media")
+      case "women":
+        return #imageLiteral(resourceName: "women")
+      case "youth":
+        return #imageLiteral(resourceName: "youth")
+      default:
+        return #imageLiteral(resourceName: "default")
+      }
+    }
+
     class func getTagsByNameArray(_ arrayOfTagNames: [String], successCallback: @escaping ([Tag]) -> ()) -> () {
         let lowercaseArrayOfTagNames: [String] = arrayOfTagNames.map { (tagName) -> String in
             return tagName.lowercased()
@@ -71,7 +100,6 @@ class Tag: PFObject, PFSubclassing {
         
         return tags;
     }
-
 
     func printHumanReadableTestString() -> () {
         print("This is a tag with name: '\(name!)'")

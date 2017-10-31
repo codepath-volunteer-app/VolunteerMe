@@ -41,8 +41,10 @@ class EventDetailsViewController: UIViewController {
             eventDate.text = event!.humanReadableDateString
             eventTime.text = event!.humanReadableTimeRange
             descriptionText.text = event!.eventDescription
-//            eventImage.setImageWith(URL(string: event!.imageUrl!)!)
-            
+            if let tags = event!.tags {
+                eventImage.image = tags[0].getImage()
+            }
+
             if event!.isInPast() {
                 self.registerButton.isHidden = true
             } else {
