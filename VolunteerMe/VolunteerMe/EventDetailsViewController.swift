@@ -72,6 +72,7 @@ class EventDetailsViewController: UIViewController {
             let sfRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake((event?.location?.latitude)!, (event?.location?.longitude)!),
                                                   MKCoordinateSpanMake(0.01, 0.01))
              mapView.setRegion(sfRegion, animated: false)
+            annotateMap()
         }
         // Do any additional setup after loading the view.
     }
@@ -136,6 +137,18 @@ class EventDetailsViewController: UIViewController {
      // Pass the selected object to the new view controller.
      }
      */
+    
+  // MARK : - MAP Config
+    func annotateMap() {
+        let annotation = MKPointAnnotation()
+        let latitude = event?.location?.latitude as! CLLocationDegrees
+        let longitude = event?.location?.longitude as! CLLocationDegrees
+        annotation.coordinate = CLLocationCoordinate2DMake(latitude, longitude)
+        annotation.title = event?.name
+        
+        mapView.addAnnotation(annotation)
+    }
+    
     
 }
 
