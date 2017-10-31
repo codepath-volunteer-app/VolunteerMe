@@ -42,7 +42,11 @@ class EventDetailsViewController: UIViewController {
             eventTime.text = event!.humanReadableTimeRange
             descriptionText.text = event!.eventDescription
             if let tags = event!.tags {
-                eventImage.image = tags[0].getImage()
+                if tags.count > 0 {
+                    eventImage.image = tags[0].getImage()
+                } else {
+                    eventImage.image = Tag.DEFAULT_TAG_IMAGE
+                }
             }
 
             if event!.isInPast() {

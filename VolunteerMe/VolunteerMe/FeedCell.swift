@@ -27,7 +27,11 @@ class FeedCell: UITableViewCell {
             tagsLabel.textColor = Color.SECONDARY_COLOR
 
             if let tags = event.tags {
-                profileImage.image = tags[0].getImage()
+                if tags.count > 0 {
+                    profileImage.image = tags[0].getImage()
+                } else {
+                    profileImage.image = Tag.DEFAULT_TAG_IMAGE
+                }
 
                 let tagNames: [String] = tags.map({ (tag: Tag) -> String? in
                     return tag.name

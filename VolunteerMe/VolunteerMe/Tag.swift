@@ -10,6 +10,8 @@ import Foundation
 import Parse
 
 class Tag: PFObject, PFSubclassing {
+    static let DEFAULT_TAG_IMAGE = #imageLiteral(resourceName: "default")
+
     // name of tag
     @NSManaged var name: String?
 
@@ -62,7 +64,7 @@ class Tag: PFObject, PFSubclassing {
       case "youth":
         return #imageLiteral(resourceName: "youth")
       default:
-        return #imageLiteral(resourceName: "default")
+        return Tag.DEFAULT_TAG_IMAGE
       }
     }
 
