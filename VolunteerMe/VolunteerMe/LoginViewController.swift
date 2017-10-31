@@ -61,9 +61,9 @@ class LoginViewController: UIViewController {
             self.onSuccess()
         }) {
             (error: Error) in
-                self.createAlert(title: "Oops!", message: "That username and password combination doesn't already have an account. Tap 'Create Account' to make a new account.")
-                }
+                self.createAlert(title: "Oops!", message: "We had trouble logging you into your account. If you want to make a new account, tap 'Create Account'.  Error message: \(error.localizedDescription).")
       }
+    }
   }
 
   func createAlert(title: String, message: String) {

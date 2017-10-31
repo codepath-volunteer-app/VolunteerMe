@@ -87,7 +87,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        print("==========================")
 //        user.printHumanReadableTestString()
 //    }
-
     // Should preload all the tags at the load of the app
     Tag.getTagsByNameArray(["fun", "full day", "reading", "arts"]) {
         (tags: [Tag]) in
