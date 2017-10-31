@@ -39,8 +39,13 @@ class FilterViewController: UIViewController, UITableViewDelegate, UITableViewDa
                                                      results:[Int: Bool](), checked_index: 0)
  */
     let tagsSection: SectionStruct = SectionStruct(headerTitle: "Tags", cellType: "switchCell",
+<<<<<<< HEAD
                                                        data:[("Fun Reading", "funreading"), ("Animals", "Animals"),
                                                              ("Discrimination", "Discrimination"),("Education","Education"), ("Play", "play")],
+=======
+                                                       data:[("Animals", "animals"), ("Arts", "arts"), ("Full Day", "full day"), ("Fun", "fun"), ("Reading", "reading"), ("Women", "women"), ("Men", "men"), ("Children", "children"), ("Board Development", "board development"),
+                                                             ("Media", "media"),("Feed the Hungry","hunger"), ("Homelessness", "housing"), ("LGBT", "lgbt"), ("Education", "education"), ("Politics", "politics")],
+>>>>>>> 1ca11660248d4e6f41ff28c06261ce59eaf4a9e5
                                                        results:[Int: Bool](), checked_index: 0)
     
     

@@ -48,8 +48,32 @@ class OrganizationLoginViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-  @IBOutlet var loginButtonTapped: UITapGestureRecognizer!
+
+  @IBAction func loginButtonTapped(_ sender: Any) {
+    if usernameField.text == nil || usernameField.text == "" {
+      createAlert(title: "Oops!", message: "Please enter your username.")
+    } else if passwordField.text == nil || passwordField.text == "" {
+      createAlert(title: "Oops!", message: "Please enter your password.")
+    } else {
+      User.login(username: usernameField.text!, password: passwordField.text!, successCallback: {
+        (user) in
+        self.onSuccess()
+      }) {
+        (error: Error) in
+        self.createAlert(title: "Oops!", message: "That username and password combination doesn't already have an account. Tap 'Create Account' to make a new account.")
+      }
+    }
+  }
+
+  func createAlert(title: String, message: String) {
+    let alertController = UIAlertController(title: title, message: message, preferredStyle: UIAlertControllerStyle.alert)
+    alertController.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.default, handler: nil))
+    self.present(alertController, animated: true, completion: nil)
+  }
+
+  func onSuccess() {
+    self.performSegue(withIdentifier: "orgLoginSegue", sender: self)
+  }
 
     /*
     // MARK: - Navigation

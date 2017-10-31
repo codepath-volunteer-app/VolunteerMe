@@ -14,6 +14,7 @@ class Event:PFObject, PFSubclassing {
     fileprivate static let DEFAULT_MAX_ATTENDEES = 100
     fileprivate static let DEFAULT_SEARCH_MILES_RADIUS = 5
     fileprivate static let DEFAULT_NUMBER_OF_ITEMS_TO_SEARCH = 20
+    fileprivate static let DEFAULT_NUMBER_OF_SECONDS_EVENT = 3600
     
     @NSManaged var name: String?
     @NSManaged var nameLower: String?
@@ -25,6 +26,8 @@ class Event:PFObject, PFSubclassing {
     // unix timestamp representing datetime of event
     @NSManaged var datetime: String?
     @NSManaged var maxAttendees: NSNumber?
+    // number of seconds the event lasts
+    @NSManaged var duration: NSNumber?
 
     var humanReadableDateString: String? {
         get {
@@ -48,6 +51,21 @@ class Event:PFObject, PFSubclassing {
             return nil
         }
     }
+    var humanReadableTimeRange: String? {
+        get {
+            if let datetime  = datetime {
+                if let duration = duration {
+                    let startDate = Date(timeIntervalSince1970: (Double(datetime)!))
+                    let endDate = Date(timeIntervalSince1970: (Double(datetime)! + Double(duration)))
+                    
+                    return "\(startDate.format(with: "H:mm") ) - \(endDate.format(with: "H:mm"))"
+                }
+            }
+
+            return nil
+        }
+    }
+
     var attendees: [User] = []
 
     fileprivate class func _getEvents(radiusInMiles: Double, targetLocation: (Double, Double), searchString: String?, tags: [Tag]?, limit: Int?, successCallback: @escaping ([Event]) -> ()) -> () {
@@ -83,13 +101,19 @@ class Event:PFObject, PFSubclassing {
         }
     }
 
-    fileprivate class func _createEvent(name: String, datetime: String, latLong: (Double, Double), eventDescription: String?, imageUrl: String?, maxAttendees: Int?, tags: [Tag]?, successCallback: @escaping (Event) -> ()) -> (){
+    fileprivate class func _createEvent(name: String, datetime: String, duration: NSNumber?, latLong: (Double, Double), eventDescription: String?, imageUrl: String?, maxAttendees: Int?, tags: [Tag]?, successCallback: @escaping (Event) -> ()) -> (){
         let event = Event()
         event.name = name
         event.nameLower = name.lowercased()
         event.datetime = datetime
         let (lat, long) = latLong
         event.location = PFGeoPoint(latitude: lat, longitude: long)
+
+        if let duration = duration {
+            event.duration = duration
+        } else {
+            event.duration = DEFAULT_NUMBER_OF_SECONDS_EVENT as! NSNumber
+        }
         
         if let eventDescription = eventDescription {
             event.eventDescription = eventDescription
@@ -119,14 +143,14 @@ class Event:PFObject, PFSubclassing {
         }
     }
 
-    class func createEvent(name: String, datetime: String, latLong: (Double, Double), eventDescription: String?, imageUrl: String?, maxAttendees: Int?, tags: [String]?, successCallback: @escaping (Event) -> ()) -> (){
+    class func createEvent(name: String, datetime: String, duration: NSNumber?, latLong: (Double, Double), eventDescription: String?, imageUrl: String?, maxAttendees: Int?, tags: [String]?, successCallback: @escaping (Event) -> ()) -> (){
         if let tags = tags {
             Tag.getTagsByNameArray(tags) {
                 (tags: [Tag]) in
-                Event._createEvent(name: name, datetime: datetime, latLong: latLong, eventDescription: eventDescription, imageUrl: imageUrl, maxAttendees: maxAttendees, tags: tags, successCallback: successCallback)
+                Event._createEvent(name: name, datetime: datetime, duration: duration, latLong: latLong, eventDescription: eventDescription, imageUrl: imageUrl, maxAttendees: maxAttendees, tags: tags, successCallback: successCallback)
             }
         } else {
-            Event._createEvent(name: name, datetime: datetime, latLong: latLong, eventDescription: eventDescription, imageUrl: imageUrl, maxAttendees: maxAttendees, tags: nil, successCallback: successCallback)
+            Event._createEvent(name: name, datetime: datetime, duration: duration, latLong: latLong, eventDescription: eventDescription, imageUrl: imageUrl, maxAttendees: maxAttendees, tags: nil, successCallback: successCallback)
         }
     }
 

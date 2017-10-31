@@ -23,17 +23,28 @@ class FeedCell: UITableViewCell {
             feedDescriptionLabel.text = event.eventDescription
             dateLabel.text = event.humanReadableDateString
             feedTitleLabel.text = event.name
+            eventTimeLabel.text = event.humanReadableTimeRange
             
             if let imageUrlString = event.imageUrl {
                 let imageUrl = URL(string: imageUrlString)
                 profileImage.setImageWith(imageUrl!)
             }
-            tagsLabel.text = "Tags: "
+
             if let tags = event.tags {
-                for tag in tags {
-                    if let tagName = tag.name {
-                        tagsLabel.text! += "\(tagName)"
-                    }
+                let tagNames: [String] = tags.map({ (tag: Tag) -> String? in
+                    return tag.name
+                }).filter({ (tagName: String?) -> Bool in
+                    return tagName != nil
+                }).map({ (tagName: String?) -> String in
+                    return tagName!
+                })
+                
+                let listOfTagNames = tagNames.joined(separator: ", ")
+                
+                if listOfTagNames.count > 0 {
+                    tagsLabel.text = "Tags: \(listOfTagNames)"
+                } else {
+                    tagsLabel.text = nil
                 }
             }
         }

@@ -14,8 +14,10 @@ class CreateAccountViewController: UIViewController {
   @IBOutlet weak var subtitleText: UILabel!
   @IBOutlet weak var usernameField: UITextField!
   @IBOutlet weak var passwordField: UITextField!
+  @IBOutlet weak var descriptionField: UITextField!
   @IBOutlet weak var usernameUnderline: UIView!
   @IBOutlet weak var passwordUnderline: UIView!
+  @IBOutlet weak var descriptionUnderline: UIView!
   @IBOutlet weak var createAccountButtonBackground: UIView!
   @IBOutlet weak var createAccountButtonLabel: UILabel!
   @IBOutlet weak var tagsView: UIView!
@@ -38,6 +40,7 @@ class CreateAccountViewController: UIViewController {
     subtitleText.textColor = Color.PRIMARY_COLOR
     usernameUnderline.backgroundColor = Color.PRIMARY_COLOR
     passwordUnderline.backgroundColor = Color.PRIMARY_COLOR
+    descriptionUnderline.backgroundColor = Color.PRIMARY_COLOR
 
     createAccountButtonBackground.backgroundColor = Color.PRIMARY_COLOR
     createAccountButtonBackground.layer.cornerRadius = 8.0
@@ -108,7 +111,8 @@ class CreateAccountViewController: UIViewController {
     } else if selectedTags.count == 0 {
       createAlert(title: "Oops!", message: "Don't forget to select a few categories you're interested in!")
     } else {
-      User.createNewUser(username: usernameField.text!, password: passwordField.text!, name: usernameField.text, userDescription: nil, userType: .Volunteer, profilePictureUrl: nil, tags: selectedTags) { (user) in
+      let userDescription = descriptionField.text == "" ? nil : descriptionField.text
+      User.createNewUser(username: usernameField.text!, password: passwordField.text!, name: usernameField.text, userDescription: userDescription, userType: .Volunteer, profilePictureUrl: nil, tags: selectedTags) { (user) in
         self.performSegue(withIdentifier: "CreatedAccountSegue", sender: self)
       }
     }

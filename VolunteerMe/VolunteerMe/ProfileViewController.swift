@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, EventDetailsViewControllerDelegate {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var profileName: UILabel!
     @IBOutlet weak var profileHours: UILabel!
@@ -31,14 +31,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
             profileTags.text = tagText
             
-            currentUser!.getParticipatingEvents(userEventType: .Upcoming) { (upcomingEvents) in
-                self.events.append(upcomingEvents)
-                self.tableView.reloadData()
-            }
-
-            currentUser!.getParticipatingEvents(userEventType: .Past) { (pastEvents) in
-                self.events.append(pastEvents)
-                self.tableView.reloadData()
+            updateEventsForCurrentUser()
+            currentUser!.getCompletedEventsHours { (totalHours: Int) in
+                self.profileHours.text = "\(totalHours) hours completed"
             }
         }
     }
@@ -101,6 +96,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         tableView.deselectRow(at: indexPath, animated: true)
     }
 
+    func onUnregister() {
+        self.events = []
+        updateEventsForCurrentUser()
+    }
 
     // MARK: - Navigation
 
@@ -110,10 +109,25 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             let cell = sender as! EventCell
             let eventDetailsController = segue.destination as! EventDetailsViewController
             eventDetailsController.event = cell.event
+            eventDetailsController.delegate = self
         }
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
     }
 
-
+    fileprivate func updateEventsForCurrentUser() {
+        currentUser!.getParticipatingEvents(userEventType: .All) { (allEvents: [Event]) in
+            let pastEvents = allEvents.filter({ (event: Event) -> Bool in
+                return event.isInPast()
+            })
+            
+            let upcomingEvents = allEvents.filter({ (event: Event) -> Bool in
+                return event.isInFuture()
+            })
+            
+            self.events.append(upcomingEvents)
+            self.events.append(pastEvents)
+            self.tableView.reloadData()
+        }
+    }
 }

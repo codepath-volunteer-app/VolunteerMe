@@ -32,7 +32,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Go straight to volunteer feed
         // COMMENT OUT THIS LINE IF YOU WANT TO VIEW THE LOGIN SCREEN
         
-//        window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "FeedNavigationViewController")
+        window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "FeedNavigationViewController")
     }
 
     return true
@@ -87,36 +87,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        print("==========================")
 //        user.printHumanReadableTestString()
 //    }
-    
-    Tag.createNewTag(name: "animals") { _ in
-    }
-    Tag.createNewTag(name: "lgbt") { _ in
-    }
-    Tag.createNewTag(name: "board development") { _ in
-    }
-    Tag.createNewTag(name: "media") { _ in
-    }
-    Tag.createNewTag(name: "politics") { _ in
-    }
-    Tag.createNewTag(name: "women") { _ in
-    }
-    Tag.createNewTag(name: "men") { _ in
-    }
-    Tag.createNewTag(name: "children") { _ in
-    }
-    Tag.createNewTag(name: "hunger") { _ in
-    }
-    Tag.createNewTag(name: "housing") { _ in
-    }
 
-    User.login(username: "teaflavored", password: "teaflavored") {
-        (user: User) in
-        print("==========================")
-        print("current user")
-        print("==========================")
-        print(User.current())
-    }
-    
     // Should preload all the tags at the load of the app
     Tag.getTagsByNameArray(["fun", "full day", "reading", "arts"]) {
         (tags: [Tag]) in

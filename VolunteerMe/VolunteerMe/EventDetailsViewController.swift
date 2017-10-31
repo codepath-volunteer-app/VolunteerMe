@@ -9,18 +9,24 @@
 import UIKit
 import MapKit
 
+protocol EventDetailsViewControllerDelegate {
+    func onUnregister() -> ()
+}
+
 class EventDetailsViewController: UIViewController {
     
     @IBOutlet weak var titleText: UILabel!
     @IBOutlet weak var eventDate: UILabel!
     @IBOutlet weak var eventTime: UILabel!
     @IBOutlet weak var eventImage: UIImageView!
+    @IBOutlet weak var registerButton: UIView!
     @IBOutlet weak var registerButtonBackground: UIView!
     @IBOutlet weak var registerButtonLabel: UILabel!
     @IBOutlet weak var descriptionText: UILabel!
     @IBOutlet weak var map: UIView!
     @IBOutlet weak var mapView: MKMapView!
     
+    var delegate: EventDetailsViewControllerDelegate?
     private var registered: Bool = false
     var event: Event?
     
@@ -33,15 +39,22 @@ class EventDetailsViewController: UIViewController {
         if event != nil {
             titleText.text = event!.name
             eventDate.text = event!.humanReadableDateString
-            eventTime.text = event!.humanReadableTimeString
+            eventTime.text = event!.humanReadableTimeRange
 //            eventImage.setImageWith(URL(string: event!.imageUrl!)!)
-            event!.fetchAttendees(successCallback: { (usersAttending) in
-                for attendee in usersAttending {
-                    if attendee.objectId == User.current()!.objectId {
-                        self.registered = true
-                        self.registerButtonBackground.alpha = 0.5
-                        break
+            
+            if event!.isInPast() {
+                self.registerButton.isHidden = true
+            } else {
+                self.registerButton.isHidden = false
+                event!.fetchAttendees(successCallback: { (usersAttending) in
+                    for attendee in usersAttending {
+                        if attendee.objectId == User.current()!.objectId {
+                            self.registered = true
+                            self.registerButtonBackground.alpha = 0.5
+                            break
+                        }
                     }
+<<<<<<< HEAD
                 }
             })
            //Set the map, with the pin. Select the region.
@@ -62,6 +75,10 @@ class EventDetailsViewController: UIViewController {
  */
  
             
+=======
+                })
+            }
+>>>>>>> 1ca11660248d4e6f41ff28c06261ce59eaf4a9e5
         }
         // Do any additional setup after loading the view.
         
@@ -94,6 +111,17 @@ class EventDetailsViewController: UIViewController {
         alertController.addAction(UIAlertAction(title: "Cancel my registration", style: .default, handler: { (action: UIAlertAction!) in
             self.registered = false
             self.registerButtonBackground.alpha = 1.0
+          User.current()!.unregisterEvent(event: self.event!, successCallback: { (unregistered) in
+            if unregistered {
+                self.createAlert(title: "Unregistered", message: "You successfully unregistered for this event")
+
+                if let delegate = self.delegate {
+                    delegate.onUnregister()
+                }
+            } else {
+              self.createAlert(title: "Oops!", message: "Something went wrong. Please try again later or directly contact the organization.")
+            }
+          })
         }))
         alertController.addAction(UIAlertAction(title: "Stay registered", style: .cancel, handler: { (action: UIAlertAction!) in
             // ok
