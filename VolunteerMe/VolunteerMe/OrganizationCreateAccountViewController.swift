@@ -22,14 +22,14 @@ class OrganizationCreateAccountViewController: UIViewController {
     @IBOutlet weak var createAccountButtonText: UILabel!
 
     @IBOutlet weak var animalsTag: UILabel!
-    @IBOutlet weak var discriminationTag: UILabel!
     @IBOutlet weak var educationTag: UILabel!
-    @IBOutlet weak var elderlyTag: UILabel!
-    @IBOutlet weak var environmentTag: UILabel!
-    @IBOutlet weak var healthTag: UILabel!
+    @IBOutlet weak var readingTag: UILabel!
     @IBOutlet weak var homelessnessTag: UILabel!
+    @IBOutlet weak var womenTag: UILabel!
+    @IBOutlet weak var menTag: UILabel!
+    @IBOutlet weak var politicsTag: UILabel!
     @IBOutlet weak var hungerTag: UILabel!
-    @IBOutlet weak var youthTag: UILabel!
+    @IBOutlet weak var mediaTag: UILabel!
     
     var tagLabels: [UILabel] = [UILabel]()
 
@@ -47,15 +47,15 @@ class OrganizationCreateAccountViewController: UIViewController {
         createAccountButtonText.textColor = Color.WHITE
 
         tagLabels = [
-          animalsTag,
-          discriminationTag,
-          educationTag,
-          elderlyTag,
-          environmentTag,
-          healthTag,
-          homelessnessTag,
-          hungerTag,
-          youthTag,
+            animalsTag,
+            educationTag,
+            readingTag,
+            homelessnessTag,
+            womenTag,
+            menTag,
+            politicsTag,
+            hungerTag,
+            mediaTag,
         ]
 
         var i = 0
@@ -99,7 +99,10 @@ class OrganizationCreateAccountViewController: UIViewController {
       var selectedTags: [String] = [String]()
       for tag in tagLabels {
         if tag.backgroundColor == Color.SECONDARY_COLOR {
-          selectedTags.append(tag.text!)
+            if let tagName = CreateAccountViewController.mapOfTagStringsToTagNames[tag.text!.trimmingCharacters(in:
+                [" "])] {
+                selectedTags.append(tagName)
+            }
         }
       }
 
