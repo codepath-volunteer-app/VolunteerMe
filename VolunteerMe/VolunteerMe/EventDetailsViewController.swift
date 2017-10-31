@@ -40,6 +40,7 @@ class EventDetailsViewController: UIViewController {
             titleText.text = event!.name
             eventDate.text = event!.humanReadableDateString
             eventTime.text = event!.humanReadableTimeRange
+            descriptionText.text = event!.eventDescription
 //            eventImage.setImageWith(URL(string: event!.imageUrl!)!)
             
             if event!.isInPast() {
