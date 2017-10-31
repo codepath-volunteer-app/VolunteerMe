@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AFNetworking
 
 class EventCell: UITableViewCell {
     
@@ -20,6 +21,10 @@ class EventCell: UITableViewCell {
             title.text = event!.name
             descriptionLabel.text = event!.eventDescription
             time.text = event!.datetime
+            if let imageUrlString = event!.imageUrl {
+                let imageUrl = URL(string: imageUrlString)
+                eventImage.setImageWith(imageUrl!)
+            }
         }
     }
 

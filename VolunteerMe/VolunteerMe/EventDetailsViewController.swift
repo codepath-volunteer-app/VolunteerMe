@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import MapKit
 
 class EventDetailsViewController: UIViewController {
     
@@ -18,6 +19,7 @@ class EventDetailsViewController: UIViewController {
     @IBOutlet weak var registerButtonLabel: UILabel!
     @IBOutlet weak var descriptionText: UILabel!
     @IBOutlet weak var map: UIView!
+    @IBOutlet weak var mapView: MKMapView!
     
     private var registered: Bool = false
     var event: Event?
@@ -42,8 +44,27 @@ class EventDetailsViewController: UIViewController {
                     }
                 }
             })
+           //Set the map, with the pin. Select the region.
+            //one degree of latitude is approximately 111 kilometers (69 miles) at all times.
+            let sfRegion = MKCoordinateRegionMake(CLLocationCoordinate2DMake(37.783333, -122.416667),
+                                                  MKCoordinateSpanMake(0.1, 0.1))
+             mapView.setRegion(sfRegion, animated: false)
+            /*
+             
+             //Add annotation
+             let annotation = PhotoAnnotation()
+             annotation.coordinate = CLLocationCoordinate2DMake(latitude as! CLLocationDegrees, longitude as! CLLocationDegrees)
+             // annotation.title = "Picture!"
+             
+             
+             
+             mapView.addAnnotation(annotation)
+ */
+ 
+            
         }
         // Do any additional setup after loading the view.
+        
     }
     
     @IBAction func registerButtonTapped(_ sender: Any) {

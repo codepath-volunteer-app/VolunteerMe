@@ -787,7 +787,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="99" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="biS-Fi-NJp">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="618"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="FeedCell" rowHeight="150" id="V8g-5R-wUi" customClass="FeedCell" customModule="VolunteerMe" customModuleProvider="target">
@@ -935,7 +935,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="yuh-6c-88m">
-                                <rect key="frame" x="0.0" y="217" width="375" height="450"/>
+                                <rect key="frame" x="0.0" y="217" width="375" height="401"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="HeaderCell" rowHeight="79" id="Y3W-fU-d9W" customClass="HeaderCell" customModule="VolunteerMe" customModuleProvider="target">
@@ -1145,16 +1145,16 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rhp-NV-AmE">
                                 <rect key="frame" x="8" y="294" width="359" height="310"/>
                                 <subviews>
-                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="map" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="stn-uc-ZjB">
-                                        <rect key="frame" x="150" y="138" width="34" height="21"/>
-                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                        <nil key="textColor"/>
-                                        <nil key="highlightedColor"/>
-                                    </label>
+                                    <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="5Es-Mx-oAG">
+                                        <rect key="frame" x="0.0" y="0.0" width="359" height="310"/>
+                                    </mapView>
                                 </subviews>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="5Es-Mx-oAG" firstAttribute="top" secondItem="Rhp-NV-AmE" secondAttribute="top" id="9Iw-xt-4oy"/>
+                                    <constraint firstItem="5Es-Mx-oAG" firstAttribute="leading" secondItem="Rhp-NV-AmE" secondAttribute="leading" id="Zxk-Ty-gXV"/>
+                                    <constraint firstAttribute="bottom" secondItem="5Es-Mx-oAG" secondAttribute="bottom" id="dgG-TX-95F"/>
+                                    <constraint firstAttribute="trailing" secondItem="5Es-Mx-oAG" secondAttribute="trailing" id="grk-n5-gzr"/>
                                     <constraint firstAttribute="width" secondItem="Rhp-NV-AmE" secondAttribute="height" multiplier="359:310" id="uOb-j9-p3M"/>
                                 </constraints>
                             </view>
@@ -1195,6 +1195,7 @@
                         <outlet property="eventImage" destination="PIW-R8-tBd" id="7O0-oi-Uve"/>
                         <outlet property="eventTime" destination="AD7-lM-SYE" id="oY3-nZ-P6c"/>
                         <outlet property="map" destination="Rhp-NV-AmE" id="ZpH-8W-LpP"/>
+                        <outlet property="mapView" destination="5Es-Mx-oAG" id="o7A-hZ-rwa"/>
                         <outlet property="registerButtonBackground" destination="9yv-jV-tiU" id="eWF-y4-1hp"/>
                         <outlet property="registerButtonLabel" destination="m6t-t1-FXn" id="4WQ-XI-Zws"/>
                         <outlet property="titleText" destination="ANE-gu-ODG" id="NFu-Hc-Le3"/>
@@ -1207,7 +1208,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="1345" y="759"/>
+            <point key="canvasLocation" x="1344.8" y="757.87106446776613"/>
         </scene>
         <!--Filter-->
         <scene sceneID="fiw-V8-VEm">
@@ -1431,7 +1432,7 @@
         <image name="volunteer-icon" width="25" height="25"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TC2-ga-1Rw"/>
+        <segue reference="Ed0-t6-jLl"/>
         <segue reference="oB3-ob-ntH"/>
     </inferredMetricsTieBreakers>
 </document>
