@@ -20,7 +20,7 @@ class EventCell: UITableViewCell {
         didSet {
             title.text = event!.name
             descriptionLabel.text = event!.eventDescription
-            time.text = event!.datetime
+            time.text = "\(event!.humanReadableDateString!) at \(event!.humanReadableTimeString!)"
             if let imageUrlString = event!.imageUrl {
                 let imageUrl = URL(string: imageUrlString)
                 eventImage.setImageWith(imageUrl!)
