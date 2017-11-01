@@ -5,7 +5,7 @@
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13174"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -1235,9 +1235,11 @@
                             <constraint firstItem="Rhp-NV-AmE" firstAttribute="leading" secondItem="8vB-hZ-EMs" secondAttribute="leading" constant="8" id="Xr8-AK-sjg"/>
                             <constraint firstItem="EkQ-u2-pKq" firstAttribute="top" secondItem="ANE-gu-ODG" secondAttribute="bottom" constant="2" id="YFV-SB-Ucv"/>
                             <constraint firstItem="9yv-jV-tiU" firstAttribute="top" secondItem="AD7-lM-SYE" secondAttribute="bottom" constant="4" id="ZM9-vm-YIQ"/>
+                            <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="ANE-gu-ODG" secondAttribute="trailing" constant="8" id="Zup-xr-QG2"/>
                             <constraint firstItem="Rhp-NV-AmE" firstAttribute="top" secondItem="CBa-Q3-wyH" secondAttribute="bottom" constant="20" id="cje-RZ-ohJ"/>
                             <constraint firstItem="EkQ-u2-pKq" firstAttribute="leading" secondItem="ANE-gu-ODG" secondAttribute="leading" id="dXa-Hm-o0V"/>
                             <constraint firstItem="9yv-jV-tiU" firstAttribute="bottom" secondItem="PIW-R8-tBd" secondAttribute="bottom" id="f0T-KI-E7R"/>
+                            <constraint firstItem="0IN-f4-09Q" firstAttribute="top" relation="greaterThanOrEqual" secondItem="Rhp-NV-AmE" secondAttribute="bottom" priority="999" constant="8" id="kGh-nC-ViC"/>
                             <constraint firstItem="CBa-Q3-wyH" firstAttribute="top" secondItem="PIW-R8-tBd" secondAttribute="bottom" constant="16" id="mo5-sR-EmW"/>
                             <constraint firstItem="ANE-gu-ODG" firstAttribute="leading" secondItem="PIW-R8-tBd" secondAttribute="trailing" constant="15" id="rvr-NM-0RM"/>
                             <constraint firstItem="AD7-lM-SYE" firstAttribute="top" secondItem="EkQ-u2-pKq" secondAttribute="bottom" constant="2" id="sgq-0M-EVb"/>
