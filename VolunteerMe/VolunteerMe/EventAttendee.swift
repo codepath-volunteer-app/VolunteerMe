@@ -68,19 +68,25 @@ class EventAttendee: PFObject, PFSubclassing {
         query.findObjectsInBackground { (results: [PFObject]?, error: Error?) in
             if let results = results {
                 let eventAttendees = results as! [EventAttendee]
-                var events: [Event] = []
 
-                for eventAttendee in eventAttendees {
-                    let event = eventAttendee.object(forKey: "event")
-                    
-                    if let event = event {
-                        let event = event as! Event
-                        event.fetchInBackground()
-                        events.append(event)
+                let eventObjectIds = eventAttendees.map({ (eventAttendee: EventAttendee) -> String in
+                    return (eventAttendee.object(forKey: "event") as! Event).objectId!
+                })
+                
+                let eventQuery = PFQuery(className: "Event")
+
+                eventQuery.includeKey("tags")
+                eventQuery.whereKey("objectId", containedIn: eventObjectIds)
+                eventQuery.findObjectsInBackground(block: { (result: [PFObject]?, error: Error?) in
+                    print(result)
+                    if let result = result {
+                        let events = result as! [Event]
+                        
+                        successCallback(events)
+                    } else if error != nil {
+                        print(error!.localizedDescription)
                     }
-                }
-
-                successCallback(events)
+                })
             } else if error != nil {
                 print(error?.localizedDescription)
             }
